@@ -6,12 +6,17 @@ export const setRegisterdata = (itemm) =>
 export const setSignin = (email, password) =>
 ({
     type: 'SET_SIGNIN',
-    payload: {email, password}
+    payload: { email, password }
 })
 export const addToCart = (item) =>
-    (
-        {
-            type:'SET_ADDTOCART',
-            payload:item
-        }
-    )
+(
+    {
+        type: 'SET_ADDTOCART',
+        payload: item
+    }
+)
+
+export const removeFromCart = (itemId) => ({
+    type: 'REMOVE_FROM_CART',
+    payload: itemId
+});

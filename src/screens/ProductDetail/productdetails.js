@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import "./productdetails.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../../redux/action";
+import { useNavigate } from "react-router";
 
 const ProductDetail = () => {
+
+  const dispatch = useDispatch()
+  const navv = useNavigate()
 
   const cartDesc = useSelector(state => state.addtocartt.addtocartItems);
   console.log('cartDesc', cartDesc);
@@ -34,10 +39,25 @@ const ProductDetail = () => {
     return total;
   }
 
+  const handleRemove = (index) => {
+    // Remove the item from the cart
+    dispatch(removeFromCart(cartDesc[index].id));
+    // Remove the item from quantities state
+    const newQuantities = quantities.filter((_, i) => i !== index);
+    setQuantities(newQuantities);
+  }
+   const gotobilling = () => {
+    navv("/order")
+   }
+
   return (
     <div className="product-detail-container">
       <div className="shopping-cart">
-        <h3>SHOPPING CART</h3>
+        <h3 style={{
+          marginLeft:30,
+       
+          
+        }}>SHOPPING CART</h3>
         <hr />
         <div className="product-scroll">
           {cartDesc.map((item, index) => (
@@ -54,17 +74,19 @@ const ProductDetail = () => {
                 <button onClick={() => handleDecrement(index)} className="quantity-button">-</button>
                 <span className="quantity-display">{quantities[index]}</span>
                 <button onClick={() => handleIncrement(index)} className="quantity-button">+</button><br />
-                <button className="remove-button">REMOVE</button><br />
+                <button onClick={() => handleRemove(index)} className="remove-button">REMOVE</button><br />
               </div>
               <hr />
             </div>
           ))}
+
+         
         </div>
       </div>
       <div className="payment-summary">
         <span>Total Payment:</span><br />
-        <span>₹ {getGrandTotalPrice()}</span>
-        <button className="proceed-button">Proceed to Buy</button>
+        <span>₹ {getGrandTotalPrice().toFixed(3)}</span>
+        <button onClick={gotobilling} className="proceed-button">Proceed to Buy</button>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./CategoryName.css";
 import axios from 'axios';
 
-const CategoryName = () => {
+const CategoryName = ({ onCategorySelect }) => {
     const [categoryList, setCategoryList] = useState([]);
 
     const fetchCategories = async () => {
@@ -23,7 +23,11 @@ const CategoryName = () => {
         <div className="category-container">
             {categoryList.length > 0 ? (
                 categoryList.map((item, index) => (
-                    <button key={index} style={{ border: 'none', background: "none", width: '100%', padding: '10px' }}>
+                    <button
+                        key={index}
+                        onClick={() => onCategorySelect(item.slug)}
+                        style={{ border: 'none', background: "none", width: '100%', padding: '10px' }}
+                    >
                         <span>{item.name}</span>
                     </button>
                 ))

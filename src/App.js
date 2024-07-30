@@ -11,6 +11,9 @@ import Account from "./screens/Account/account";
 import Orderbuy from "./screens/Orderbuy/orderbuy";
 import {Provider} from 'react-redux'
 import store from "./redux/store";
+import Cat from "./screens/categories/categories";
+
+
 
 function App() {
   return (
@@ -24,6 +27,7 @@ function App() {
       <Route path="/addtocart" element={<Addtocart/>}/>
       <Route path="/account" element={<Account/>}></Route>
       <Route path="/order"  element={<Orderbuy/>}></Route>
+      <Route path="/cat" element={<Cat />} />
     </Routes>
     </Provider>
     </Router>  

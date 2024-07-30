@@ -17,7 +17,7 @@ const Products = () => {
     try{
       const response = await axios.get("https://dummyjson.com/products")
       setAllProduct(response.data.products)
-      console.log(response.data.products);
+      // console.log(response.data.products);
     }
     catch (error){
         console.error(error)
@@ -37,7 +37,7 @@ const Products = () => {
         <div className="productss">
             {
               allProduct.map((item)=> (
-                <button key={item.id} onClick={()=> productdtl(item)} className="btnproduct">
+            <button key={item.id} onClick={()=> productdtl(item)} className="btnproduct">
             <img style={{height:200,width:370}} src={item.thumbnail} alt="product thumbnail"></img>
             <span style={{fontWeight:'700',fontSize:20}}>{item.title}</span>
             <span style={{fontWeight:'400',fontSize:15,textAlign:'left'}}>{item.description}</span>

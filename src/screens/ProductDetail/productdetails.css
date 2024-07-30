@@ -1,7 +1,10 @@
 .product-detail-container {
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     padding: 20px;
+    width: '100%';
+    
+    gap: 30px;
   }
   
   .shopping-cart {
@@ -9,6 +12,8 @@
     overflow-y: auto;
     max-height: calc(100vh - 40px); /* Adjust height as needed */
     width: 75%;
+    background-color: #f2f2f2;
+    padding-top: 20px;
   }
   
   .product-scroll {
@@ -19,6 +24,7 @@
     display: flex;
     flex-direction: row;
     padding: 10px;
+    margin-top: 20px;
   }
   
   .product-img img {
@@ -64,6 +70,7 @@
     padding: 13px 40px;
     border: 1px solid #e0e0e0;
     cursor: pointer;
+    margin-top: 14px;
   }
   
   .payment-summary {
@@ -73,6 +80,7 @@
     position: sticky;
     top: 0; /* Sticky to keep it visible at the top */
     height: fit-content;
+    
   }
   
   .proceed-button {

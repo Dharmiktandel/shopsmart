@@ -1,49 +1,43 @@
 import React from "react";
-import Navbar from "../../components/Navbar/Navbar";
-import "./account.css"
-import user from "../../assets/userr.png"
+import { useLocation, useNavigate } from 'react-router-dom'; // Import useLocation
+import searchh from "../../assets/searchIcon.png";
+import "./categories.css";
 
-const Account = () => {
-    return(
+const Cat = () => {
+    const location = useLocation();
+    const redirect = useNavigate();
+    const { categoryData, categoryName } = location.state || {}; // Get data from state
+
+    if (!categoryData) {
+        return <p>No category data available.</p>;
+    }
+
+
+    const productdtl = (item)=> {
+        redirect("/addtocart", { state: { item } })
+     }
+
+    return (
         <>
-           <div>
-            <Navbar/>
-           </div>
-
-           <div className="accountmaincontainer">
-            <div className="rootcontainer">
-                <div className="leftsidediv">
-                    <div className="Profile">
-                        <img style={{width:40,height:40}} src={user} alt="kl"></img>
-                        <div><span style={{paddingLeft:25}}>Hello,</span><br></br>
-                        <span style={{paddingLeft:25,fontWeight:1000,fontSize:20}} >Dharmik Tandel</span></div>
-                    </div>
-                    <div className="accountsetting">
-                        <h3 style={{paddingTop:10,paddingLeft:20}}>MY ORDERS</h3>
-                        <hr></hr>
-                        <h3 style={{paddingLeft:20}}>ACCOUNT SETTINGS</h3>
-                        <li style={{listStyle:"none",paddingLeft:40}}>Profile Information</li>
-                        <li style={{listStyle:"none",paddingLeft:40}}>Manage Address</li>
-                        <li style={{listStyle:"none",paddingLeft:40}}>Pan Card Information</li>
-                    </div>
-                </div>
-                <div className="rightsidediv">
-                   <h2>Personal Information</h2><br></br>
-                   <input style={{padding:7,width:200,}} type="text" placeholder="first name"></input>&nbsp;&nbsp;&nbsp;
-                   <input style={{padding:7,width:200}} type="text" placeholder="last name"></input><br></br><br></br>
-                   <h2>Your Gender</h2><br></br>
-                  <input style={{height:15,justifyContent:"center",alignItems:"center"}} type="radio"></input>&nbsp;&nbsp;
-                  <span style={{}}>Male</span>&nbsp;&nbsp;
-                  <input style={{height:15}} type="radio"></input>&nbsp;&nbsp;
-                  <span>Female</span><br></br><br></br>
-                  <h2>Email Address</h2><br></br>
-                  <input style={{padding:7,width:200}} type="email" placeholder="email"></input><br></br><br></br>
-                  <h2>Mobile Number</h2><br></br>
-                  <input style={{padding:7,width:200}} type="text" placeholder="number"></input>&nbsp;&nbsp;&nbsp;
+            <div style={{ paddingTop: 20 }}>
+                <h2>Products in {categoryName}</h2>
+                <div className="maincat">
+                    {categoryData.length > 0 ? (
+                        categoryData.map((product) => (
+                            <button key={product.id} onClick={()=> productdtl(product)} className="btncat">
+                                <img style={{ width: '100%' }} src={product.thumbnail} alt={product.title} />
+                                <span style={{ fontWeight: '700', fontSize: 20 }}>{product.title}</span>
+                                <span style={{ fontWeight: '400', fontSize: 15, textAlign: 'left' }}>{product.description}</span>
+                                <span style={{ color: "red", fontWeight: 1000 }}>${product.price}</span>
+                            </button>
+                        ))
+                    ) : (
+                        <p>No products available.</p>
+                    )}
                 </div>
             </div>
-           </div>
         </>
-    )
-}
-export default Account;
+    );
+};
+
+export default Cat;
