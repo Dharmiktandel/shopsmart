@@ -1,0 +1,90 @@
+.product-detail-container {
+    display: flex;
+    /* justify-content: space-between; */
+    padding: 20px;
+  }
+  
+  .shopping-cart {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 40px); /* Adjust height as needed */
+    width: 75%;
+  }
+  
+  .product-scroll {
+    overflow-y: auto;
+  }
+  
+  .product-item {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+  }
+  
+  .product-img img {
+    height: 230px;
+    width: 230px;
+    background-color: white;
+  }
+  
+  .product-info {
+    padding-left: 20px;
+  }
+  
+  .quantity-button {
+    color: #000;
+    border-radius: 50%;
+    background: linear-gradient(#fff, #f9f9f9);
+    border: 1px solid #c2c2c2;
+    line-height: 1;
+    padding: 1px;
+    width: 28px;
+    height: 28px;
+  }
+  
+  .quantity-display {
+    color: #000;
+    padding: 3px 15px;
+    width: 66px;
+    height: 28px;
+    border-radius: 2px;
+    background: #fff;
+    border: 1px solid #c2c2c2;
+    margin: 0 5px;
+    text-align: center;
+  }
+  
+  .remove-button {
+    position: relative;
+    background-color: #063970;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 3px;
+    width: 170px;
+    padding: 13px 40px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+  }
+  
+  .payment-summary {
+    background: #f2f2f2;
+    width: 240px;
+    padding: 15px;
+    position: sticky;
+    top: 0; /* Sticky to keep it visible at the top */
+    height: fit-content;
+  }
+  
+  .proceed-button {
+    position: relative;
+    background-color: #063970;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 3px;
+    width: 200px;
+    padding: 10px 40px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  

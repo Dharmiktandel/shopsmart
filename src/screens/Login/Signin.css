@@ -1,0 +1,47 @@
+.loginsubcontainer{
+    display: flex;
+    flex-direction: row;
+    padding-top: 80px;
+    padding-left: 30px;
+    height: 500px;
+    gap: 100px;
+    
+
+}
+.loginform{
+    margin-top: 50px;
+
+}
+.inpttxt{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: none;
+    padding-left: 5px;
+    background-color: none;
+    width: 300px;
+}
+.inputpwd{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 300px;
+    padding-left: 5px;
+}
+.btnlogin{
+    height: 40px;
+    width: 80px;
+    color: white;
+    background-color: #063970;
+}
+.forgetpwd{
+    color: #063970;
+    font-weight: 300;
+    background: none;
+    border: none;
+    
+}
+.par{
+    color: red;
+    margin-top: -15px;
+  }

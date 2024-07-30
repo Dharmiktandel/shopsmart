@@ -1,0 +1,74 @@
+.footercontainer{
+    /* background-color: #063970; */
+    background-color: black;
+    height: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    padding-left: 250px;
+    padding-top: 50px;
+}
+.btnsubscribe{
+    border: none;
+    background: none;
+    color: white;
+    font-size: 14px;
+    }
+  .btnsubscribe:hover{
+    color: orangered;
+ }   
+ .btnaccount{
+    border: none;
+    background: none;
+    color: white;
+    font-size: 14px;
+ }
+ .btnaccount:hover{
+    color: orangered;
+ }
+ .loginbutton{
+    border: none;
+    background: none;
+    color: white;
+    font-size: 14px;
+ }
+ .loginbutton:hover{
+    color: orangered;
+ }
+ .refisterbutton{
+    border: none;
+    background: none;
+    color: white;
+    font-size: 14px;
+ }
+ .refisterbutton:hover{
+    color: orangered;
+ }
+ .privacy{
+    border: none;
+    background: none;
+    color: white;
+    font-size: 14px;
+ }
+ .privacy:hover{
+    color: orangered;
+ }
+ .term{
+    border: none;
+    background: none;
+    color: white;
+    font-size: 14px;
+ }
+ .term:hover{
+    color: orangered;
+ }
+ .faq{
+    border: none;
+    background: none;
+    color: white;
+    font-size: 14px;
+ }
+ .faq:hover{
+    color: orangered;
+ }

@@ -1,0 +1,16 @@
+.billdtl{
+    padding-top: 50px;
+    padding-left: 150px;
+}
+.billconatiner{
+    display: flex;
+    flex-direction: row;
+}
+.btnporder{
+    border-radius: 3px;
+    height: 40px;
+    width: 120px;
+    background-color: #063970;
+    color: white;
+
+}

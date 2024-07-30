@@ -1,0 +1,42 @@
+.accountmaincontainer{
+    background-color: #f2f2f2;
+    width: 1425px;
+    height: 1000px;
+}
+.Profile{
+    background-color: white;
+    height: 70px;
+    width: 300px;
+    padding-top: 15px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    
+    
+}
+.leftsidediv
+{
+     padding-top: 30px;
+     padding-left: 30px;
+     
+}
+.accountsetting{
+    background-color: white;
+    height: 300px;
+    width: 300px;
+     margin-top: 30px;
+     
+} 
+.rightsidediv{
+    background-color: white;
+    height: 700px;
+    width: 800px;
+    margin-top: 30px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+.rootcontainer{
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
