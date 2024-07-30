@@ -46,7 +46,7 @@ const ProductDetail = () => {
                 <img src={item.thumbnail} alt={item.title} />
               </div>
               <div className="product-info">
-                <span>{item.description}</span><br />
+                {/* <span>{item.description}</span><br /> */}
                 <span>{item.title}</span><br />
                 <span>{item.price}</span><br />
                 <span>Total Price :</span><br />
