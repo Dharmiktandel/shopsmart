@@ -1,0 +1,8 @@
+.subContainer{
+    display: flex;
+    flex-direction: row;
+    padding-top: 70px;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 50px;
+   padding-right: 50px;
