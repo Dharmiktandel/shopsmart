@@ -29,12 +29,12 @@ const Addtocart = () => {
             <Navbar />
 
             <div className="addtocartmaincontainer">
-                <div className="addtocartsubcontainer">
+                <div className="addtocartsubconatiner">
                     <div className="small-img">
                         {item.images.map((productImage, index) => (
                             <img
                                 key={index}
-                                style={{ height: 70, width: 70, backgroundColor: "white", marginTop: 10 }}
+                                style={{ height: 60, width: 70, backgroundColor: "white", marginTop: 10,marginLeft:15,marginBottom:10, }}
                                 src={productImage}
                                 alt={`product-${index}`}
                             />
@@ -47,11 +47,15 @@ const Addtocart = () => {
                             alt="main-thumbnail"
                         />
                     </div>
-                    <div style={{ paddingTop: 20 }}>
+                    <div style={{ paddingTop: 20, }}>
                         <span style={{ color: "#000", fontSize: 18, fontWeight: '500' }}>
                             {item.title}
                         </span>
                         <br />
+                        <span style={{ color: "#000", fontSize: 18, fontWeight: '500' }}>
+                            {item.description}
+                        </span>
+                        <br/>
                         <span style={{ color: "grey", fontSize: 15 }}>
                             STORE: INFINITY WORKS
                         </span>
