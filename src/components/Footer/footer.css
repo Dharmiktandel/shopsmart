@@ -1,6 +1,6 @@
 .footercontainer{
-    /* background-color: #063970; */
-    background-color: black;
+    background-color: #063970;
+    /* background-color: black; */
     height: 250px;
     width: 100%;
     display: flex;

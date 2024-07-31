@@ -28,18 +28,22 @@ const Account = () => {
                     </div>
                 </div>
                 <div className="rightsidediv">
-                   <h2>Personal Information</h2><br></br>
-                   <input style={{padding:7,width:200,}} type="text" placeholder="first name"></input>&nbsp;&nbsp;&nbsp;
-                   <input style={{padding:7,width:200}} type="text" placeholder="last name"></input><br></br><br></br>
-                   <h2>Your Gender</h2><br></br>
-                  <input style={{height:15,justifyContent:"center",alignItems:"center"}} type="radio"></input>&nbsp;&nbsp;
-                  <span style={{}}>Male</span>&nbsp;&nbsp;
-                  <input style={{height:15}} type="radio"></input>&nbsp;&nbsp;
-                  <span>Female</span><br></br><br></br>
-                  <h2>Email Address</h2><br></br>
-                  <input style={{padding:7,width:200}} type="email" placeholder="email"></input><br></br><br></br>
-                  <h2>Mobile Number</h2><br></br>
-                  <input style={{padding:7,width:200}} type="text" placeholder="number"></input>&nbsp;&nbsp;&nbsp;
+                   <h2 style={{fontWeight:"800"}}>Personal Information</h2>
+                   <span style={{fontSize:15,fontWeight:"548"}}>First Name:</span>&nbsp;
+                   <span style={{fontSize:20}}>Dharmik</span><br/>
+                   <span style={{fontSize:15,fontWeight:"548"}}>Last Name:</span>&nbsp;
+                   <span style={{fontSize:20}}>Tandel</span><br/>
+                   <h2 style={{fontWeight:"800"}}>Your Gender</h2>
+                  {/* <input style={{height:15,justifyContent:"center",alignItems:"center"}} type="radio"></input>&nbsp;&nbsp; */}
+                  <span style={{fontSize:15}}>Male</span>&nbsp;&nbsp;
+                  {/* <input style={{height:15}} type="radio"></input>&nbsp;&nbsp; */}
+                  <span style={{fontSize:15}}>Female</span><br></br><br></br>
+                  <h2 style={{fontWeight:"800"}}>Email Address</h2>
+                  <span style={{fontSize:20}}>tandelk@gmail.com</span><br/><br/>
+                  {/* <input style={{padding:7,width:200}} type="email" placeholder="email"></input><br></br><br></br> */}
+                  <h2 style={{fontWeight:"800"}}>Mobile Number</h2>
+                  <span style={{fontSize:20}}>8866279670</span>
+                  {/* <input style={{padding:7,width:200}} type="text" placeholder="number"></input>&nbsp;&nbsp;&nbsp; */}
                 </div>
             </div>
            </div>

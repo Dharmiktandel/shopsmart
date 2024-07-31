@@ -1,6 +1,6 @@
 .accountmaincontainer{
     background-color: #f2f2f2;
-    width: 1425px;
+    width: 100%;
     height: 1000px;
 }
 .Profile{
@@ -11,13 +11,15 @@
     padding-left: 20px;
     display: flex;
     flex-direction: row;
+   
     
     
 }
 .leftsidediv
 {
-     padding-top: 30px;
+     padding-top: 70px;
      padding-left: 30px;
+     
      
 }
 .accountsetting{
@@ -28,12 +30,13 @@
      
 } 
 .rightsidediv{
-    background-color: white;
-    height: 700px;
+    
+    height: 400px;
     width: 800px;
-    margin-top: 30px;
+    margin-top: 70px;
     padding-left: 20px;
-    padding-top: 20px;
+    padding-top: 10px;
+    background-color: white;
 }
 .rootcontainer{
     display: flex;

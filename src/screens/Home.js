@@ -37,7 +37,7 @@ const Home = () => {
             <div className="mainContainer">
                 <div className="subContainer">
                     <div className="categories">
-                        <h5>Categories</h5>
+                        <h5 style={{fontSize:20,fontWeight:1000}}>Categories</h5>
                         <div className="listScroll">
                             <CategoryName onCategorySelect={handleCategorySelect} />
                         </div>
