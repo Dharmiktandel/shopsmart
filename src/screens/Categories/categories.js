@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from 'react-router-dom'; // Import useLocation
-import searchh from "../../assets/searchIcon.png";
+//import searchh from "../../assets/searchIcon.png";
 import "./categories.css";
 
 const Cat = () => {
