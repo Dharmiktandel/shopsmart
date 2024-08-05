@@ -33,6 +33,10 @@ const Navbar = () => {
                 </button>
             </div>
             <div className="icons">
+
+            <button onClick={()=> navig("/account")} className="fa fa-user-circle">
+                            &nbsp;&nbsp;Account
+                        </button>
                 {isAuthenticate ? (
                     <>
                         <button onClick={handleLogout} className="fa fa-user-circle">

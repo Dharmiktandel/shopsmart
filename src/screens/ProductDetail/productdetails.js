@@ -1,15 +1,15 @@
+// src/components/ProductDetail/ProductDetail.js
 import React, { useState } from "react";
 import "./productdetails.css";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../../redux/action";
+import { removeFromCart, setCartForOrder, setTotalPrice } from "../../redux/action";
 import { useNavigate } from "react-router";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
-  const navv = useNavigate();
+  const navigate = useNavigate();
 
   const cartDesc = useSelector(state => state.addtocartt.addtocartItems);
-  console.log('cartDesc', cartDesc);
 
   const [quantities, setQuantities] = useState(cartDesc.map(() => 1));
 
@@ -32,23 +32,18 @@ const ProductDetail = () => {
   }
 
   const getGrandTotalPrice = () => {
-    let total = 0;
-    for (let i = 0; i < cartDesc.length; i++) {
-      total += cartDesc[i].price * quantities[i];
-    }
-    return total;
+    return cartDesc.reduce((total, item, index) => total + item.price * quantities[index], 0);
   }
 
   const handleRemove = (index) => {
-    // Remove the item from the cart
     dispatch(removeFromCart(cartDesc[index].id));
-    // Remove the item from quantities state
     const newQuantities = quantities.filter((_, i) => i !== index);
     setQuantities(newQuantities);
   }
 
   const gotobilling = () => {
-    navv("/order");
+    dispatch(setTotalPrice(getGrandTotalPrice())); // Set total price in Redux
+    navigate("/order");
   }
 
   return (

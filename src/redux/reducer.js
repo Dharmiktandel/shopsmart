@@ -1,4 +1,3 @@
-// src/redux/reducers.js
 import { combineReducers } from "redux";
 
 // Initial state for signup
@@ -12,6 +11,12 @@ const signupInitialState = {
 const addtocartInitialState = {
     addtocartItems: []
 };
+
+// Initial state for total price
+const totalPriceInitialState = {
+    totalPrice: 0
+};
+
 
 // Reducer for signup actions
 const signupReducer = (state = signupInitialState, action) => {
@@ -62,10 +67,29 @@ const addtocartReducer = (state = addtocartInitialState, action) => {
     }
 };
 
+// Reducer for total price actions
+const totalPriceReducer = (state = totalPriceInitialState, action) => {
+    switch (action.type) {
+        case 'SET_TOTAL_PRICE':
+            return {
+                ...state,
+                totalPrice: action.payload
+            };
+        case 'CLEAR_TOTAL_PRICE':
+            return {
+                ...state,
+                totalPrice: 0
+            };
+        default:
+            return state;
+    }
+};
+
 // Combine reducers
 const rootReducer = combineReducers({
     signuped: signupReducer,
     addtocartt: addtocartReducer,
+    totalPrice: totalPriceReducer // Added totalPrice reducer
 });
 
 export default rootReducer;

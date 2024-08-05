@@ -1,51 +1,57 @@
+// src/components/Orderbuy/Orderbuy.js
 import React from "react";
-import "./orderbuy.css"
+import "./orderbuy.css";
 import Navbar from "../../components/Navbar/Navbar";
-import logoo from "../../assets/userr.png"
+import { useSelector } from "react-redux";
 
 const Orderbuy = () => {
-    return(
-        <>
-            <div>
-                <Navbar/>
-            </div>
+  const fetchCart = useSelector(state => state.addtocartt.addtocartItems);
+  const totalPrice = useSelector(state => state.totalPrice.totalPrice);
 
-            <div className="billconatiner">
-            <div className="billdtl">
-            <h3 style={{fontWeight:1000}}>Billing Details</h3><br/>
-            <span style={{fontWeight:"800"}}>Name</span><br></br>
-            <input style={{border:"none",background:"#f2f2f2",padding:5,width:300}} type="text"></input><br></br><br></br>
-            <span style={{fontWeight:"800"}}>Company Name</span><br/>
-            <input style={{border:"none",background:"#f2f2f2",padding:5,width:300}} type="text"></input><br/><br/>
-            <span style={{fontWeight:"800"}}>Street Address</span><br/>
-            <input style={{border:"none",background:"#f2f2f2",padding:5,width:300}} type="text"></input><br/><br/>
-            <span style={{fontWeight:"800"}}>Apartment,floor etc..</span><br/>
-            <input style={{border:"none",background:"#f2f2f2",padding:5,width:300}} type="text"></input><br/><br/>
-            <span style={{fontWeight:"800"}}>City</span><br/>
-            <input style={{border:"none",background:"#f2f2f2",padding:5,width:300}} type="text"></input><br/><br/>
-            <span style={{fontWeight:"800"}}>Phone Number</span><br/>
-            <input style={{border:"none",background:"#f2f2f2",padding:5,width:300}} type="text"></input><br/><br/>
-            <span style={{fontWeight:"800"}}>Email Address</span><br/>
-            <input style={{border:"none",background:"#f2f2f2",padding:5,width:300}} type="email"></input><br/><br/>
-            </div>
+  return (
+    <>
+      <div>
+        <Navbar />
+      </div>
 
-            <div style={{paddingTop:120,paddingLeft:200}}>
-              <div style={{display:"flex",flexDirection:"row",}}>
-                <img style={{height:35}} src={logoo} alt="ll"></img>&nbsp;&nbsp;
-                <span style={{color:"#000", fontSize: 20, fontWeight: '500',}}>item name</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style={{color:"#000",fontSize: 20,fontWeight:500}}>RS.120</span>
-               </div> <br></br>
-               <span style={{color:"#000", fontSize: 20, fontWeight: '500',}}>Subtotal:</span>
-               <span style={{color:"#000",fontSize: 20,fontWeight:500,paddingLeft:176}}>RS.120</span>
-               <hr></hr>
-               <span style={{color:"#000", fontSize: 20, fontWeight: '500',}}>Total:</span>
-               <span style={{color:"#000",fontSize: 20,fontWeight:500,paddingLeft:210}}>RS.120</span><br/><br/><br/>
-               <button className="btnporder">Place Order</button>
+      <div className="billconatiner">
+        <div className="billdtl">
+          <h3 style={{ fontWeight: 1000 }}>Billing Details</h3><br />
+          <span style={{ fontWeight: "800" }}>Name</span><br />
+          <input style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }} type="text" /><br /><br />
+          <span style={{ fontWeight: "800" }}>Company Name</span><br />
+          <input style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }} type="text" /><br /><br />
+          <span style={{ fontWeight: "800" }}>Street Address</span><br />
+          <input style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }} type="text" /><br /><br />
+          <span style={{ fontWeight: "800" }}>Apartment, floor etc..</span><br />
+          <input style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }} type="text" /><br /><br />
+          <span style={{ fontWeight: "800" }}>City</span><br />
+          <input style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }} type="text" /><br /><br />
+          <span style={{ fontWeight: "800" }}>Phone Number</span><br />
+          <input style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }} type="text" /><br /><br />
+          <span style={{ fontWeight: "800" }}>Email Address</span><br />
+          <input style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }} type="email" /><br /><br />
+        </div>
+        <div style={{ marginTop: 130 }}>
+          {fetchCart.map((cartItem) => (
+            <div key={cartItem.id} style={{ marginTop: 10, marginLeft: 200 }}>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <img style={{ height: 35, width: 35 }} src={cartItem.thumbnail} alt="item-thumbnail" />&nbsp;&nbsp;
+                <span style={{ color: "#000", fontSize: 20, fontWeight: '500', width: 500 }}>{cartItem.title}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style={{ color: "#000", fontSize: 20, fontWeight: 500 }}>{cartItem.price}</span>
+              </div>
             </div>
-           
-               
-            </div>
-        </>
-    )
+          ))}
+          <br />
+          <hr style={{ marginLeft: 200 }} />
+          <span style={{ color: "#000", fontSize: 20, fontWeight: '500', marginLeft: 200 }}>Subtotal:</span>
+          <span style={{ color: "#000", fontSize: 20, fontWeight: 500, marginLeft: 520 }}>₹ {totalPrice.toFixed(2)}</span>
+          <br /><br />
+          <button style={{ marginLeft: 200 }} className="btnporder">Place Order</button>
+        </div>
+      </div>
+    </>
+  )
 }
+
 export default Orderbuy;
