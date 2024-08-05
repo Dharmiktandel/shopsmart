@@ -9,20 +9,22 @@ const Addtocart = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-    const { item } = location.state;
+    const { item } = location.state || {}; // Use default empty object if location.state is undefined
 
     // Access authentication state from Redux store
     const isAuthenticated = useSelector(state => state.signuped.isAuthenticate);
-    console.log('isssssssssssssssssssss',isAuthenticated);
+    console.log('isAuthenticated', isAuthenticated);
 
     const handleAddToCart = () => {
-        if (isAuthenticated) {
+        if (isAuthenticated && item) {
             dispatch(addToCart(item));
             navigate('/productDetail');
         } else {
             navigate('/signin');
         }
     };
+
+   
 
     return (
         <>
@@ -31,10 +33,10 @@ const Addtocart = () => {
             <div className="addtocartmaincontainer">
                 <div className="addtocartsubconatiner">
                     <div className="small-img">
-                        {item.images.map((productImage, index) => (
+                        {item.images?.map((productImage, index) => (
                             <img
                                 key={index}
-                                style={{ height: 60, width: 70, backgroundColor: "white", marginTop: 10,marginLeft:15,marginBottom:10, }}
+                                style={{ height: 60, width: 70, backgroundColor: "white", marginTop: 10, marginLeft: 15, marginBottom: 10 }}
                                 src={productImage}
                                 alt={`product-${index}`}
                             />
@@ -47,7 +49,7 @@ const Addtocart = () => {
                             alt="main-thumbnail"
                         />
                     </div>
-                    <div style={{ paddingTop: 20, }}>
+                    <div style={{ paddingTop: 20 }}>
                         <span style={{ color: "#000", fontSize: 18, fontWeight: '500' }}>
                             {item.title}
                         </span>
@@ -55,7 +57,7 @@ const Addtocart = () => {
                         <span style={{ color: "#000", fontSize: 18, fontWeight: '500' }}>
                             {item.description}
                         </span>
-                        <br/>
+                        <br />
                         <span style={{ color: "grey", fontSize: 15 }}>
                             STORE: INFINITY WORKS
                         </span>

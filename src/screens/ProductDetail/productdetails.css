@@ -96,3 +96,16 @@
     margin-top: 5px;
   }
   
+  /* productdetails.css */
+.empty-cart-message {
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-cart-message h3 {
+  color: #ff0000;
+}
+
+.empty-cart-message p {
+  color: #333;
+}

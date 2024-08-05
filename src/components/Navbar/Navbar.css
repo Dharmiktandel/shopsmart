@@ -44,6 +44,8 @@ body {
     font-size: 20px;
     padding: 10px;
     transition: 0.6s;
+    background: none;
+    border: none;
 }
 
 .icons .fa:hover{

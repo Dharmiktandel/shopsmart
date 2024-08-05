@@ -32,12 +32,12 @@ const Account = () => {
                    <span style={{fontSize:15,fontWeight:"548"}}>First Name:</span>&nbsp;
                    <span style={{fontSize:20}}>Dharmik</span><br/>
                    <span style={{fontSize:15,fontWeight:"548"}}>Last Name:</span>&nbsp;
-                   <span style={{fontSize:20}}>Tandel</span><br/>
-                   <h2 style={{fontWeight:"800"}}>Your Gender</h2>
+                   <span style={{fontSize:20}}>Tandel</span><br/><br/>
+                    {/* <h2 style={{fontWeight:"800"}}>Your Gender</h2> */}
                   {/* <input style={{height:15,justifyContent:"center",alignItems:"center"}} type="radio"></input>&nbsp;&nbsp; */}
-                  <span style={{fontSize:15}}>Male</span>&nbsp;&nbsp;
+                  {/* <span style={{fontSize:15}}>Male</span>&nbsp;&nbsp; */}
                   {/* <input style={{height:15}} type="radio"></input>&nbsp;&nbsp; */}
-                  <span style={{fontSize:15}}>Female</span><br></br><br></br>
+                  {/* <span style={{fontSize:15}}>Female</span><br></br><br></br>  */}
                   <h2 style={{fontWeight:"800"}}>Email Address</h2>
                   <span style={{fontSize:20}}>tandelk@gmail.com</span><br/><br/>
                   {/* <input style={{padding:7,width:200}} type="email" placeholder="email"></input><br></br><br></br> */}

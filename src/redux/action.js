@@ -1,3 +1,4 @@
+// src/redux/action.js
 export const setRegisterdata = (item) => ({
     type: 'SET_SIGNUP',
     payload: item
@@ -6,6 +7,10 @@ export const setRegisterdata = (item) => ({
 export const setSignin = (email, password) => ({
     type: 'SET_SIGNIN',
     payload: { email, password }
+});
+
+export const logout = () => ({
+    type: 'LOGOUT'
 });
 
 export const addToCart = (item) => ({
