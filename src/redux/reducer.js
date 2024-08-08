@@ -1,5 +1,3 @@
-// src/redux/reducer.js
-
 import { combineReducers } from 'redux';
 
 // Initial state for signup
@@ -11,7 +9,7 @@ const signupInitialState = {
 
 // Initial state for cart
 const addtocartInitialState = {
-    addtocartItems: []
+    cartItems: {} // Object to store cart items keyed by user email
 };
 
 // Initial state for total price
@@ -19,6 +17,7 @@ const totalPriceInitialState = {
     totalPrice: 0
 };
 
+// Initial state for cart details
 const cartDetailsInitialState = {
     detailedItems: [] // New state for storing detailed items
 };
@@ -56,17 +55,36 @@ const signupReducer = (state = signupInitialState, action) => {
 
 // Reducer for cart actions
 const addtocartReducer = (state = addtocartInitialState, action) => {
+    const { userEmail } = action.payload || {}; // Extract userEmail from action payload
+
     switch (action.type) {
-        case 'SET_ADDTOCART':
+        case 'ADD_TO_CART':
+            const newItem = action.payload.item;
+            const updatedCartItems = { ...state.cartItems };
+
+            if (!updatedCartItems[userEmail]) {
+                updatedCartItems[userEmail] = [];
+            }
+
+            updatedCartItems[userEmail] = [...updatedCartItems[userEmail], newItem];
+
             return {
                 ...state,
-                addtocartItems: [...state.addtocartItems, action.payload]
+                cartItems: updatedCartItems
             };
+
         case 'REMOVE_FROM_CART':
+            const { itemId } = action.payload;
+            const filteredCartItems = (state.cartItems[userEmail] || []).filter(item => item.id !== itemId);
+
             return {
                 ...state,
-                addtocartItems: state.addtocartItems.filter(item => item.id !== action.payload)
+                cartItems: {
+                    ...state.cartItems,
+                    [userEmail]: filteredCartItems
+                }
             };
+
         default:
             return state;
     }
@@ -90,6 +108,7 @@ const totalPriceReducer = (state = totalPriceInitialState, action) => {
     }
 };
 
+// Reducer for cart details
 const cartDetailsReducer = (state = cartDetailsInitialState, action) => {
     switch (action.type) {
         case 'SET_CART_DETAILS':
@@ -106,7 +125,7 @@ const cartDetailsReducer = (state = cartDetailsInitialState, action) => {
 const rootReducer = combineReducers({
     signuped: signupReducer,
     addtocartt: addtocartReducer,
-    totalPrice: totalPriceReducer ,
+    totalPrice: totalPriceReducer,
     cartDetails: cartDetailsReducer
 });
 
