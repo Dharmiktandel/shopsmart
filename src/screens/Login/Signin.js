@@ -17,17 +17,45 @@ const Signin = () => {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
 
+    const validation = () => {
+        const errors = {};
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+
+        if (!email) {
+            errors.email = "Email is required";
+        } else if (!emailPattern.test(email)) {
+            errors.email = "Please enter a valid email address";
+        }
+
+        if (!password) {
+            errors.password = "Password is required";
+        } else if (!passwordPattern.test(password)) {
+            errors.password = "Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, and one digit";
+        }
+
+        return errors;
+    };
+
+
     const handleValidation = (e) => {
         e.preventDefault();
         const user = dharusers.find(
             u => u.email === email && u.password === password
         );
-        if (user) {
+        const validationErrors = validation();
+        
+        if (Object.keys(validationErrors).length === 0) {
+            if (user) {
             dispatch(setSignin(email, password));
             navv("/");
-        } else {
+          } else {
             setErrors({ general: "Invalid credentials. Please try again." });
-        }
+          }
+
+       } else {
+            setErrors(validationErrors);
+        }   
     };
 
     const handelSignup = ()=> {
@@ -51,6 +79,7 @@ const Signin = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
+                    {errors.email && <p className="paragraph">{errors.email}</p>}
                     <br /><br />
                     <input
                         className="inputpwd"
@@ -59,6 +88,7 @@ const Signin = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    {errors.password && <p className="paragraph">{errors.password}</p>}
                     <br /><br /><br />
                     {errors.general && <p className="par">{errors.general}</p>}
                     <button onClick={handleValidation} className="btnlogin">Login</button>

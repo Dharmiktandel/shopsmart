@@ -20,7 +20,7 @@ const Cat = () => {
     return (
         <>
             <div style={{ paddingTop: 20 }}>
-                <h2>Products in {categoryName}</h2>
+                <h2 style={{marginLeft:30,fontWeight:800}}>PRODUCTS IN {categoryName.toUpperCase()}</h2>
                 <div className="maincat">
                     {categoryData.length > 0 ? (
                         categoryData.map((product) => (

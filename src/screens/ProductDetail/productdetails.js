@@ -1,8 +1,9 @@
 // src/components/ProductDetail/ProductDetail.js
 import React, { useState } from "react";
+import emptycartt from "../../assets/emptycart.png";
 import "./productdetails.css";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart, setCartForOrder, setTotalPrice } from "../../redux/action";
+import { removeFromCart, setTotalPrice } from "../../redux/action";
 import { useNavigate } from "react-router";
 
 const ProductDetail = () => {
@@ -32,7 +33,7 @@ const ProductDetail = () => {
   }
 
   const getGrandTotalPrice = () => {
-    return cartDesc.reduce((total, item, index) => total + item.price * quantities[index], 0);
+    return cartDesc.reduce((total, item, index) => total + getTotalPrice(index), 0);
   }
 
   const handleRemove = (index) => {
@@ -42,7 +43,16 @@ const ProductDetail = () => {
   }
 
   const gotobilling = () => {
-    dispatch(setTotalPrice(getGrandTotalPrice())); // Set total price in Redux
+    // Prepare item details including quantity and total price
+    const detailedItems = cartDesc.map((item, index) => ({
+      ...item,
+      quantity: quantities[index],
+      totalPrice: getTotalPrice(index)
+    }));
+
+    // Dispatch action to set detailed items and total price in Redux
+    dispatch(setTotalPrice(getGrandTotalPrice()));
+    dispatch({ type: 'SET_CART_DETAILS', payload: detailedItems });
     navigate("/order");
   }
 
@@ -50,8 +60,11 @@ const ProductDetail = () => {
     <div className="product-detail-container">
       {cartDesc.length === 0 ? (
         <div className="empty-cart-message">
-          <h3>Your Cart is Empty</h3>
-          <p>Add items to your cart to proceed with checkout.</p>
+          <h2>SHOPPING CART</h2>
+           <img style={{marginLeft:190}} src={emptycartt} alt="gg"/>
+           <h1 style={{fontWeight:800}}>Your Cart Is Currently Empty! </h1>
+           <p style={{color:"grey"}}>Before proceed to checkout you must add some products to your shopping cart.<br/>You will find lot of interesting products on our "shop" page.</p>
+           
         </div>
       ) : (
         <>

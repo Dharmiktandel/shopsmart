@@ -6,6 +6,7 @@ import banner from '../assets/banner-2.png';
 import "./Home.css";
 import CategoryName from "../components/Category/categoryName";
 import axios from 'axios';
+import Footer from "../components/Footer/footer";
 
 const Home = () => {
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -46,14 +47,17 @@ const Home = () => {
                 </div>
             </div>
             <div>
-                <h3 style={{ marginLeft: 20 }}>All Products</h3>
+                <h3 style={{ marginLeft: 45,marginTop:20,fontWeight:800 }}>All Products</h3>
                 <div className="callproducts">
                     <Products />
                 </div>
             </div>
             <br />
             <hr />
-            <div></div>
+            
+            <div>
+                <Footer/>
+            </div>
         </>
     );
 };

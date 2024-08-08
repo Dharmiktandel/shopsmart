@@ -13,7 +13,7 @@
     grid-template-columns: repeat(3, 1fr); /* Creates a 3-column layout */
     gap: 30px; /* Space between items */
     padding: 20px;
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 .btncat img{
     width: 100%;

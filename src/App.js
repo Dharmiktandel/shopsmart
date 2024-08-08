@@ -12,6 +12,7 @@ import Orderbuy from "./screens/Orderbuy/orderbuy";
 import {Provider} from 'react-redux'
 import store from "./redux/store";
 import Cat from "./screens/categories/categories";
+import Bill from "./screens/Finalbill/bill";
 
 
 
@@ -28,6 +29,7 @@ function App() {
       <Route path="/account" element={<Account/>}></Route>
       <Route path="/order"  element={<Orderbuy/>}></Route>
       <Route path="/cat" element={<Cat />} />
+      <Route path="/bill" element={<Bill />} />
     </Routes>
     </Provider>
     </Router>  

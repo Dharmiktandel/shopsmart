@@ -4,14 +4,28 @@ import Navbar from "../../components/Navbar/Navbar";
 import "./account.css";
 import user from "../../assets/userr.png";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
-const Account = () => {
+const Account = () => {  
+    const navv = useNavigate();
+
+    function navig(){
+        navv("/signin")
+    }
     // Accessing the user information from the signuped slice of the state
     const loggedInUser = useSelector((state) => state.signuped.user);
     console.log('loggedInUser',loggedInUser);
 
     if (!loggedInUser) {
-        return <p>Please log in to view your account information.</p>;
+        //return <h1 style={{textAlign:"center",marginTop:200}}>Please log in to view your account information.</h1>
+        return (
+            <div style={{textAlign: "center", marginTop: 200}}>
+                <h1 style={{fontWeight:800}}>Please log in to view your account information.</h1>
+                <button onClick={navig} style={{ marginTop: 20, padding: '10px 20px', fontSize: '16px',width:150,backgroundColor:"#063970",color:"white" }}>Login</button>
+            </div>
+        );
+        
+       
     }
 
     return (

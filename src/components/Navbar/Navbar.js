@@ -33,13 +33,13 @@ const Navbar = () => {
                 </button>
             </div>
             <div className="icons">
-
-            <button onClick={()=> navig("/account")} className="fa fa-user-circle">
-                            &nbsp;&nbsp;Account
-                        </button>
+           
+            <button onClick={()=> navig("/account")} className="fa fa-user-circle"> 
+                            &nbsp;&nbsp;Account   
+                        </button>  
                 {isAuthenticate ? (
                     <>
-                        <button onClick={handleLogout} className="fa fa-user-circle">
+                        <button onClick={handleLogout} className="fa fa-sign-out">
                             &nbsp;&nbsp;Logout
                         </button>
                         <button onClick={()=>navig('/productDetail')} className="fa fa-shopping-cart">
@@ -48,7 +48,7 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        <button onClick={()=>navig('/signin')} className="fa fa-user-circle">
+                        <button onClick={()=>navig('/signin')} className="fa fa-sign-in">
                             &nbsp;&nbsp;Login
                         </button>
                         <button onClick={()=>navig('/productDetail')} className="fa fa-shopping-cart">

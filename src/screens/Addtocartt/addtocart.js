@@ -27,16 +27,21 @@ const Addtocart = () => {
    
 
     return (
-        <>
+        <div style={{height: '100%',
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor:"white"}} >
+            
             <Navbar />
 
-            <div className="addtocartmaincontainer">
+             {/* <div className="addtocartmaincontainer">  */}
                 <div className="addtocartsubconatiner">
                     <div className="small-img">
                         {item.images?.map((productImage, index) => (
                             <img
                                 key={index}
-                                style={{ height: 60, width: 70, backgroundColor: "white", marginTop: 10, marginLeft: 15, marginBottom: 10 }}
+                                style={{ height: 60, width: 60, backgroundColor: "white", marginTop: 10, marginLeft: 15, marginBottom: 10, }}
                                 src={productImage}
                                 alt={`product-${index}`}
                             />
@@ -102,8 +107,10 @@ const Addtocart = () => {
                         </button>
                     </div>
                 </div>
-            </div>
-        </>
+            
+        {/* </div> */}
+        
+        </div>
     );
 };
 
