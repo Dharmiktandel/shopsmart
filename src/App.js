@@ -1,10 +1,8 @@
 import React from "react";
-import logo from './logo.svg';
 import Home from "./screens/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import Signin from "./screens/Login/Signin";
-import Signup from "./screens/Register/Signup";
 import ProductDetail from "./screens/ProductDetail/productdetails";
 import Addtocart from "./screens/Addtocartt/addtocart";
 import Account from "./screens/Account/account";
@@ -13,6 +11,8 @@ import {Provider} from 'react-redux'
 import store from "./redux/store";
 import Cat from "./screens/categories/categories";
 import Bill from "./screens/Finalbill/bill";
+import CustomerRegistration from "./screens/Register/CustomerRegistration";
+import VendorRegistration from "./screens/Register/VendorRegistration";
 
 
 
@@ -23,7 +23,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/signin" element={<Signin/>} />
-      <Route path="/signup" element={<Signup/>} />
+      <Route path="/customerRegistration" element={<CustomerRegistration/>} />
+      <Route path="/vendorRegistration" element={<VendorRegistration/>}></Route>
       <Route path="/productDetail" element={<ProductDetail/>}/>
       <Route path="/addtocart" element={<Addtocart/>}/>
       <Route path="/account" element={<Account/>}></Route>

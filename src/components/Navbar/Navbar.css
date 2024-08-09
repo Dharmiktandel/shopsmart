@@ -1,64 +1,30 @@
-*{
+/* Navbar component styling */
+* {
     padding: 0;
     margin: 0;
     font-family: monospace;
     box-sizing: border-box;
 }
+
 body {
     padding: 0;
     margin: 0;
 }
 
-.header{
+.header {
     background-color: #063970;
-    /* background-color: orangered; */
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
     padding: 0px 25px;
     height: 120px;
     align-items: center;
-    
-    /*text-align: center;*/
- }
- .logo{
-    padding-top: 25px;
-    
-    
-}
-.search input{
-    height: 35px;
-    width: 90%;
-    border: none;
-    outline: none;
-    /* border-radius: 15px; */
-    padding: 10px;
-    font-size: 16px;
-    /* background-color: red; */
-}
- .icons{
-    text-align: right;
-}
-.icons .fa{
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
-    padding: 10px;
-    transition: 0.6s;
-    background: none;
-    border: none;
 }
 
-.icons .fa:hover{
-    color: hsl(211, 92%, 49%);
+.logo {
+    padding-top: 25px;
 }
-.btnSearch{
-    height: 35px;
-    /* background-color: yellow; */
-    background: none;
-    border: none;
-    align-items: center;
-}
-.search{
+
+.search {
     display: flex;
     flex-direction: row;
     background-color: white;
@@ -68,16 +34,55 @@ body {
     height: 45px;
     align-items: center;
     gap: 10px;
+    position: relative; /* Ensure the modal is positioned relative to this container */
 }
 
- /* @media only screen and (max-width: 600px){
-    .header {
-        grid-template-columns: auto auto;
-        padding: 10px 7px;
-        height: auto;
-    }
+.search input {
+    height: 35px;
+    width: 90%;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 16px;
+}
 
-    .icons .fa{
-        padding: 5px;
-    }
-} */
+.btnSearch {
+    height: 35px;
+    background: none;
+    border: none;
+    align-items: center;
+}
+
+.icons {
+    text-align: right;
+}
+
+.icons .fa {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;
+    transition: 0.6s;
+    background: none;
+    border: none;
+}
+
+.icons .fa:hover {
+    color: hsl(211, 92%, 49%);
+}
+
+/* Modal Styling */
+.modalsss {
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    /* height: 00px; */
+    width: 460px;
+    background-color: white; /* Ensure the modal has a white background */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 100; /* Ensure the modal appears on top of other elements */
+    border-radius: 8px;
+    border: 1px solid #ddd; /* Add a border for visibility */
+    margin-top: 3px;
+}
