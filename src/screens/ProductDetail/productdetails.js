@@ -11,6 +11,7 @@ const ProductDetail = () => {
   const navigate = useNavigate();
 
   const cartDesc = useSelector(state => state.addtocartt.addtocartItems);
+  const isAuthenticate = useSelector(state => state.signuped.isAuthenticate);
 
   const [quantities, setQuantities] = useState(cartDesc.map(() => 1));
 
@@ -56,8 +57,19 @@ const ProductDetail = () => {
     navigate("/order");
   }
 
+  const handleLoginRedirect = () => {
+    navigate("/signin");
+  }
+
   return (
-    <div className="product-detail-container">
+      <div className="product-detail-container">
+        {!isAuthenticate ? (
+        <div style={{marginTop:200,textAlign:"center",width:"100%"}}>
+          <h1 style={{fontWeight:800}}>Please log in to view your cart.</h1>
+          <button onClick={handleLoginRedirect} style={{height:50,width:150,color:"white",backgroundColor:"#063970",marginTop:20}}>Login</button>
+        </div>
+      ) : (
+        <>
       {cartDesc.length === 0 ? (
         <div className="empty-cart-message">
           <h2>SHOPPING CART</h2>
@@ -99,6 +111,8 @@ const ProductDetail = () => {
             <button onClick={gotobilling} className="proceed-button">Proceed to Buy</button>
           </div>
         </>
+      )}
+      </>
       )}
     </div>
   );

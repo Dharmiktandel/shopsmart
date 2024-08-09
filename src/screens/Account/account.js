@@ -19,7 +19,7 @@ const Account = () => {
     if (!loggedInUser) {
         //return <h1 style={{textAlign:"center",marginTop:200}}>Please log in to view your account information.</h1>
         return (
-            <div style={{textAlign: "center", marginTop: 200}}>
+            <div style={{textAlign: "center", marginTop: 200,width:"100%"}}>
                 <h1 style={{fontWeight:800}}>Please log in to view your account information.</h1>
                 <button onClick={navig} style={{ marginTop: 20, padding: '10px 20px', fontSize: '16px',width:150,backgroundColor:"#063970",color:"white" }}>Login</button>
             </div>
