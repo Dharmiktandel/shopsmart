@@ -7,14 +7,19 @@ import "./Home.css";
 import CategoryName from "../components/Category/categoryName";
 import axios from 'axios';
 import Footer from "../components/Footer/footer";
+import Shop from "../components/Shops/Shops.js";
+import { useSelector } from "react-redux";
 
 const Home = () => {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [categoryData, setCategoryData] = useState([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate(); // Use navigate
+    const getData = useSelector((state) => state.vendorAddproducts.vendorItem)
+    console.log('getData',getData);
+    
 
-    const handleCategorySelect = async (categorySlug) => {
+    const   handleCategorySelect = async (categorySlug) => {
         setSelectedCategory(categorySlug);
         setLoading(true);
         try {
@@ -46,14 +51,19 @@ const Home = () => {
                     <img style={{ height: 400 }} src={banner} alt="banner" />
                 </div>
             </div>
+            
+            <div style={{paddingBottom:20,backgroundColor:"#fff",paddingTop:20}}>
+            <h2 style={{marginLeft:110,alignItems:"center",justifyContent:"center",fontWeight:550}}>All Shops</h2>
             <div>
-                <h3 style={{ marginLeft: 45,marginTop:20,fontWeight:800 }}>All Products</h3>
-                <div className="callproducts">
-                    <Products />
-                </div>
+            <Shop/>
+            
             </div>
-            <br />
-            <hr />
+            </div>
+           
+           
+            <br/>
+
+            <hr/>
             
             <div>
                 <Footer/>

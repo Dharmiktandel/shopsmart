@@ -21,3 +21,82 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+#  {/* <input
+#                         style={{
+#                             width: 310,
+#                             marginLeft: 40,
+#                             borderTop: "none",
+#                             borderRight: "none",
+#                             borderLeft: "none",
+#                             background: "none",
+#                             fontSize: 15,
+#                             // paddingLeft: 10
+#                         }}
+#                         type="file"
+#                         accept="image/*"
+#                         onChange={handleImageChange}
+#                     />
+#                     {errors.image && <p className="paragraph">{errors.image}</p>}
+#                     <br />
+
+#                     {image && (
+#                         <div style={{ 
+#                             width: '100%', 
+#                             height: 100, 
+#                             // backgroundColor: 'yellow', 
+#                             // marginLeft: '15%',
+#                             display: 'flex',
+#                             justifyContent: 'center',
+#                             alignItems: 'center' ,
+#                             // textAlign:"center"
+#                         }}>
+#                             <img 
+#                                 src={URL.createObjectURL(image)} 
+#                                 alt="Uploaded" 
+#                                 style={{ maxHeight: '100%', maxWidth: '100%' }} 
+#                             />
+#                         </div>
+#                     )}<br/> */}
+
+
+#  <img style={{ height: 25, width: 25 ,}} 
+#                           src={vendorAccount.productimage ? URL.createObjectURL(vendorAccount.productimage) : 'defaultImagePath.jpg'} 
+#                          alt="kk"></img>
+#                 &nbsp;
+
+
+#  <img style={{
+#                         height: 100,
+#                         width: 100,
+#                         marginLeft: 130,
+#                         marginTop: 30
+#                     }}
+#                         src={customerr}
+#                         alt="kkk"></img><br />
+
+#  {/* <div>
+#                 <h3 style={{ marginLeft: 45,marginTop:20,fontWeight:800 }}>All Products</h3>
+#                 <div className="callproducts">
+#                     <Products />
+#                 </div>
+#             </div> */}
+
+
+
+#  {/* <div>
+#             {
+#     Array.isArray(getData) && getData.length > 0 ? (
+#         getData.map((item, index) => (
+#             <div key={index}>
+#                 <h3>{item.name}</h3>
+#             </div>
+#         ))
+#     ) : (
+#         <p>No items found</p>
+#     )
+# }
+
+                
+#             </div> */}

@@ -9,6 +9,12 @@ const signupInitialState = {
     users: [] // Changed to array to store multiple users
 };
 
+const vendorSignupInitialState = {
+      isAuthenticate:false,
+      user:null,
+      users:[]
+};
+
 // Initial state for cart
 const addtocartInitialState = {
     addtocartItems: []
@@ -23,6 +29,10 @@ const cartDetailsInitialState = {
     detailedItems: [] // New state for storing detailed items
 };
 
+const vendorNewProductInitialState = {
+    vendorItem : []
+}
+
 // Reducer for signup actions
 const signupReducer = (state = signupInitialState, action) => {
     switch (action.type) {
@@ -30,6 +40,7 @@ const signupReducer = (state = signupInitialState, action) => {
             return {
                 ...state,
                 users: [...state.users, action.payload] // Add new user to the list
+                
             };
         case 'SET_SIGNIN':
             const user = state.users.find(
@@ -51,6 +62,55 @@ const signupReducer = (state = signupInitialState, action) => {
             };
         default:
             return state;
+    }
+};
+
+const addVendorsNewProductReducer = (state = vendorNewProductInitialState, action)=> {
+    switch (action.type) {
+        case 'SET_ADD_PRODUCT':
+          return{
+            ...state,
+            vendorItem:[...state.vendorItem,action.payload]
+          }; 
+        case 'REMOVE_PRODUCT':
+            return {
+                ...state,
+                vendorItem: state.vendorItem.filter((_, index) => index !== action.payload),
+            };   
+          default:
+             return state
+           
+    }
+}
+
+const vendorSignupReducer = (state = vendorSignupInitialState,action) => {
+    switch(action.type){
+        case 'SET_VENDORSIGNUP':
+            return{
+                ...state,
+                users:[...state.users,action.payload],
+                
+            };
+        case 'SET_VENDORSIGNIN':
+                const user = state.users.find(
+                    u => u.vendorEmail === action.payload.vendorEmail && u.vendorPassword === action.payload.vendorPassword
+                );
+                if (user) {
+                    return {
+                        ...state,
+                        isAuthenticate: true,
+                        user: user
+                    };
+                }
+                return state;  
+                case 'SET_LOGOUT':
+                    return {
+                        ...state,
+                        isAuthenticate: false,
+                        user: null
+                    };
+            default:
+                return state;
     }
 };
 
@@ -107,7 +167,9 @@ const rootReducer = combineReducers({
     signuped: signupReducer,
     addtocartt: addtocartReducer,
     totalPrice: totalPriceReducer ,
-    cartDetails: cartDetailsReducer
+    cartDetails: cartDetailsReducer,
+    vendorsignuped:vendorSignupReducer,
+    vendorAddproducts : addVendorsNewProductReducer
 });
 
 export default rootReducer;

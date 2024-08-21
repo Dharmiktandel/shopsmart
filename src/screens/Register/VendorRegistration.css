@@ -1,0 +1,35 @@
+.signupcontainer{
+    display: flex;
+    flex-direction: row;
+    /* background-color: yellow; */
+    padding-top: 80px;
+    padding-left: 30px;
+    height: 600px;
+    gap: 100px;
+}
+.registerform{
+    /* background-color: #063970; */
+    /* margin-top: 50px; */
+}
+.inpt{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 300px;
+    
+    padding-left: 5px;
+}
+.btnregister{
+    height: 40px;
+    width: 300px;
+    color: white;
+    background-color: #063970;
+}
+.paragraph{
+    color: red;
+    margin-top: 1px;
+    margin-left: 5  px;
+    margin-bottom: -30px;
+    width: 300px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }

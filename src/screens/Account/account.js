@@ -35,7 +35,7 @@ const Account = () => {
                 <div className="rootcontainer">
                     <div className="leftsidediv">
                         <div className="Profile">
-                            <img style={{ width: 40, height: 40 }} src={user} alt="User" />
+                            <img style={{ width: 30, height: 40 }} src={loggedInUser.image ? URL.createObjectURL(loggedInUser.image) : 'defaultImagePath.jpg'} alt="User" />
                             <div>
                                 <span style={{ paddingLeft: 25 }}>Hello,</span>
                                 <br />
@@ -45,9 +45,9 @@ const Account = () => {
                             </div>
                         </div>
                         <div className="accountsetting">
-                            <h3 style={{ paddingTop: 10, paddingLeft: 20 }}>MY ORDERS</h3>
+                            <h3 style={{ paddingTop: 10, paddingLeft: 20,fontWeight:550 }}>MY ORDERS</h3>
                             <hr />
-                            <h3 style={{ paddingLeft: 20 }}>ACCOUNT SETTINGS</h3>
+                            <h3 style={{ paddingLeft: 20,fontWeight:550 }}>ACCOUNT SETTINGS</h3>
                             <ul style={{ paddingLeft: 40, listStyle: "none" }}>
                                 <li>Profile Information</li>
                                 <li>Manage Address</li>
@@ -56,17 +56,17 @@ const Account = () => {
                         </div>
                     </div>
                     <div className="rightsidediv">
-                        <h2 style={{ fontWeight: 800 }}>Personal Information</h2>
+                        <h2 style={{ fontWeight: 800,fontFamily:"sans-serif" }}>Personal Information</h2>
                         <span style={{ fontSize: 15, fontWeight: 500 }}>First Name:</span>&nbsp;
                         <span style={{ fontSize: 20 }}>{loggedInUser.firstname}</span>
                         <br />
                         <span style={{ fontSize: 15, fontWeight: 500 }}>Last Name:</span>&nbsp;
                         <span style={{ fontSize: 20 }}>{loggedInUser.lastname}</span>
                         <br /><br />
-                        <h2 style={{ fontWeight: 800 }}>Email Address</h2>
+                        <h2 style={{ fontWeight: 800,fontFamily:"sans-serif" }}>Email Address</h2>
                         <span style={{ fontSize: 20 }}>{loggedInUser.email}</span>
                         <br /><br />
-                        <h2 style={{ fontWeight: 800 }}>Mobile Number</h2>
+                        <h2 style={{ fontWeight: 800,fontFamily:"sans-serif" }}>Mobile Number</h2>
                         <span style={{ fontSize: 20 }}>{loggedInUser.phone}</span>
                     </div>
                 </div>

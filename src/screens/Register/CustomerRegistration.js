@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import customerr from '../../assets/customer.png';
 
 const CustomerRegistration = () => {
+    const [image,setImage] = useState(null)
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [phone, setPhone] = useState("");
@@ -24,6 +25,14 @@ const CustomerRegistration = () => {
         const errors = {};
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
         const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+        
+        if (!image) {
+            errors.image = "Image is required";
+        } else if (!['image/jpeg', 'image/png'].includes(image.type)) {
+            errors.image = "Only JPG and PNG images are allowed";
+        } else if (image.size > 30 * 1024 * 1024) {
+            errors.image = "Image size should not exceed 5MB";
+        }
 
         if (!firstname) {
             errors.firstname = "First name is required";
@@ -58,10 +67,15 @@ const CustomerRegistration = () => {
         return errors;
     };
 
+    const handleProductImageChangee = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+    };
+
     const handleValidation = (e) => {
         e.preventDefault();
 
-        const registerData = { firstname, lastname, phone, email, password };
+        const registerData = { image,firstname, lastname, phone, email, password };
         const validationErrors = validation();
 
         if (Object.keys(validationErrors).length === 0) {
@@ -90,7 +104,7 @@ const CustomerRegistration = () => {
                 <div style={{
                     width: 400,
                     backgroundColor: "#f2f2f2",
-                    height: 465,
+                    height: 600,
 
                     marginTop: 20,
                     display: "flex",
@@ -98,14 +112,64 @@ const CustomerRegistration = () => {
                     borderTopRightRadius: 20,
                     borderTopLeftRadius: 20
                 }}>
-                    <img style={{
-                        height: 100,
-                        width: 100,
-                        marginLeft: 130,
-                        marginTop: 30
-                    }}
-                        src={customerr}
-                        alt="kkk"></img><br />
+                   {image ? (
+                        <div style={{ 
+                            width: '100%', 
+                            height: 100, 
+                            // backgroundColor: 'yellow', 
+                            // marginLeft: '15%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            marginTop:20,
+                            alignItems: 'center' ,
+                            // textAlign:"center"
+                        }}>
+                            <img 
+                                src={URL.createObjectURL(image)} 
+                                alt="Uploaded" 
+                                style={{ maxHeight: '100%', maxWidth: '100%' }} 
+                            />
+                        </div>
+                    ) : (
+                        <div style={{ 
+                            width: '100%', 
+                            height: 100, 
+                            // backgroundColor: 'yellow', 
+                            // marginLeft: '15%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            marginTop:20,
+                            alignItems: 'center' ,
+                            // textAlign:"center"
+                        }}>
+                            <img 
+                                src={customerr} 
+                                alt="Uploaded" 
+                                style={{ maxHeight: '100%', maxWidth: '100%' }} 
+                            />
+                        </div>
+                    )}
+
+                    
+                   <input
+                        style={{
+                            width: 250,
+                            marginLeft: 100,
+                            borderTop: "none",
+                            borderRight: "none",
+                            borderLeft: "none",
+                            background:'none',
+                            fontSize: 15,
+                           marginTop:20
+                            // paddingLeft: 10
+                        }}
+                        type="file" 
+                        accept="image/*"
+                        onChange={handleProductImageChangee}
+                    />
+                    {errors.image && <p className="paragraph">{errors.image}</p>}
+                    <br />
+
                     <input style={{
                         width: 310,
                         marginLeft: 40,
@@ -191,7 +255,7 @@ const CustomerRegistration = () => {
 
                     </input>
                     {errors.password && <p className="paragraph">{errors.password}</p>}
-                    <br />
+                    <br />&nbsp;
                     <button
                         style={{
                             marginLeft: 40,
@@ -200,7 +264,8 @@ const CustomerRegistration = () => {
                             height: 50,
                             color: "white",
                             backgroundColor: "black",
-                            fontSize: 20
+                            fontSize: 20,
+                            marginTop:-10
                         }}
                         onClick={handleValidation}>
                         Register

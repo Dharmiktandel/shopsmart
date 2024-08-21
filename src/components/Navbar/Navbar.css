@@ -86,3 +86,19 @@ body {
     border: 1px solid #ddd; /* Add a border for visibility */
     margin-top: 3px;
 }
+.showodalbutton{
+    border: none;
+    background: none;
+
+}
+.modalsss span{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+    
+}
+.modalsss span:hover{
+    color: blue;
+}
+.modalsss p{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+}
+

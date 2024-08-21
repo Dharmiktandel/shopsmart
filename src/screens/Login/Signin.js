@@ -1,21 +1,27 @@
 // src/pages/Signin/Signin.jsx
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import banner from '../../assets/imageee.jpg';
+//import banner from '../../assets/imageee.jpg';
 import customerrr from '../../assets/customer.png';
 import "./Signin.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setSignin } from "../../redux/action";
+import { setSignin, setVendorSignin } from "../../redux/action";
 import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
     const navv = useNavigate();
     const dispatch = useDispatch();
-    const dharusers = useSelector((state) => state.signuped.users);
-    console.log('users', dharusers);
+    const customersignupdata = useSelector((state) => state.signuped.users);
+    const vendorsignupdata = useSelector((state) => state.vendorsignuped.users);
+    console.log('users', customersignupdata);
+    console.log("vendor",vendorsignupdata);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [vendorEmail,setVendorEmail] = useState("");
+    const [vendorPassword,setVendorPassword] = useState("")
+
+
     const [errors, setErrors] = useState({});
 
     const validation = () => {
@@ -39,9 +45,32 @@ const Signin = () => {
     };
 
 
-    const handleValidation = (e) => {
+    const vendorValidation = () => {
+        const errors = {};
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+
+        if (!vendorEmail) {
+            errors.vendorEmail = "Email is required";
+        } else if (!emailPattern.test(vendorEmail)) {
+            errors.vendorEmail = "Please enter a valid email address";
+        }
+
+        if (!vendorPassword) {
+            errors.vendorPassword = "Password is required";
+        } else if (!passwordPattern.test(vendorPassword)) {
+            errors.vendorPassword = "Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, and one digit";
+        }
+
+        return errors;
+    };
+
+
+
+
+    const handleCustomerValidation = (e) => {
         e.preventDefault();
-        const user = dharusers.find(
+        const user = customersignupdata.find(
             u => u.email === email && u.password === password
         );
         const validationErrors = validation();
@@ -58,9 +87,36 @@ const Signin = () => {
             setErrors(validationErrors);
         }
     };
+    const handleVendorValidation = (e) => {
+        e.preventDefault();
+        const userr = vendorsignupdata.find(
+            uu => uu.vendorEmail === vendorEmail && uu.vendorPassword === vendorPassword
+        );
+        const validationErrors = vendorValidation();
 
-    const handelSignup = () => {
+        if(Object.keys(validationErrors).length === 0) {
+            if(userr){
+                dispatch(setVendorSignin(vendorEmail, vendorPassword));
+                navv("/dashboard");
+            } else {
+                setErrors({general: "Invalid credentials. Please try again." });
+            }
+           
+        }
+        else{
+            setErrors(validationErrors);
+        }
+    };
+
+    
+
+
+
+    const handelCustomerSignup = () => {
         navv('/customerRegistration')
+    }
+    const handleVendorSignup = () => {
+        navv('/vendorRegistration')
     }
 
     return (
@@ -85,7 +141,7 @@ const Signin = () => {
                     <div style={{
                         width: 400,
                         backgroundColor: "#f2f2f2",
-                        height: 320,
+                        height: 340,
 
                         marginTop: 20,
                         display: "flex",
@@ -112,9 +168,12 @@ const Signin = () => {
                             paddingLeft: 10
                         }}
                             type="email"
-                            placeholder="Email Id">
+                            placeholder="Email Id"
+                            onChange={(e) => setVendorEmail(e.target.value)}>
 
-                        </input><br />
+                        </input>
+                        {errors.vendorEmail && <p className="paragraph">{errors.vendorEmail}</p>}
+                        <br />
                         <input
                             style={{
                                 width: 310,
@@ -127,9 +186,12 @@ const Signin = () => {
                                 paddingLeft: 10
                             }}
                             type="password"
-                            placeholder="Password">
+                            placeholder="Password"
+                            onChange={(e) => setVendorPassword(e.target.value)}>
 
-                        </input><br />
+                        </input>
+                        {errors.vendorPassword && <p className="paragraph">{errors.vendorPassword}</p>}
+                        <br />
                         <button
                             style={{
                                 marginLeft: 40,
@@ -138,8 +200,10 @@ const Signin = () => {
                                 height: 50,
                                 color: "white",
                                 backgroundColor: "black",
-                                fontSize: 20
-                            }}>
+                                fontSize: 20,
+                                marginTop:20
+                            }}
+                            onClick={handleVendorValidation}>
                             LOGIN
                         </button><br /><br />
 
@@ -158,8 +222,8 @@ const Signin = () => {
                             borderBottomLeftRadius: 20,
                             borderBottomRightRadius: 20,
                             border: "none",
-
-                        }}>
+                            }}
+                            onClick={handleVendorSignup}>
                         REGISTER
                     </button>
                 </div>
@@ -176,7 +240,7 @@ const Signin = () => {
                     <div style={{
                         width: 400,
                         backgroundColor: "#f2f2f2",
-                        height: 320,
+                        height: 340,
 
                         marginTop: 20,
                         display: "flex",
@@ -235,9 +299,10 @@ const Signin = () => {
                                 height: 50,
                                 color: "white",
                                 backgroundColor: "black",
-                                fontSize: 20
+                                fontSize: 20,
+                                marginTop:20
                             }}
-                            onClick={handleValidation}>
+                            onClick={handleCustomerValidation}>
                             LOGIN
                         </button><br /><br />
 
@@ -258,7 +323,7 @@ const Signin = () => {
                             border: "none",
 
                         }}
-                        onClick={handelSignup}>
+                        onClick={handelCustomerSignup}>
                         REGISTER
                     </button>
                 </div>

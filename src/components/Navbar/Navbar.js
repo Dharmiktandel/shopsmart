@@ -43,6 +43,10 @@ const Navbar = () => {
         navig("/signin"); // Redirect to the signin page after logout
     };
 
+    const productdtl = (item)=> {
+        navig("/addtocart", { state: { item } })
+     }
+
     return (
         <div className="header">
             <div className="logo">
@@ -65,13 +69,17 @@ const Navbar = () => {
                     <div className="modalsss">
                         {searchProduct.length > 0 ? (
                             searchProduct.map((item, index) => (
-                                <div key={index}>
-                                    <h1>{item.title}</h1>
+                                <div style={{padding:5}} key={index}>
+                                <button  onClick={()=> productdtl(item)} className="showodalbutton">
+                                   <img style={{height:25,width:25}} src={item.thumbnail} alt="ll"></img>&nbsp;&nbsp;
+                                   <span>{item.title}</span>
+                                    </button>
                                 </div>
                             ))
                         ) : (
                             <p>No products found</p>
                         )}
+                       
                        
                     </div>
                 )}

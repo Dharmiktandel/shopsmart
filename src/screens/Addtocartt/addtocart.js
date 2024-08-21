@@ -41,7 +41,7 @@ const Addtocart = () => {
                         {item.images?.map((productImage, index) => (
                             <img
                                 key={index}
-                                style={{ height: 60, width: 60, backgroundColor: "white", marginTop: 10, marginLeft: 15, marginBottom: 10, }}
+                                style={{ height: 60, width: 60, backgroundColor: "white", marginTop: 10, marginLeft: 15, marginBottom:10,}}
                                 src={productImage}
                                 alt={`product-${index}`}
                             />

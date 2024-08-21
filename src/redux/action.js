@@ -6,14 +6,26 @@ export const setRegisterdata = (item) => ({
     payload: item
 });
 
+export const setVendorRegisterData = (item) => ({
+    type:'SET_VENDORSIGNUP',
+    payload:item
+})
+
 export const setSignin = (email, password) => ({
     type: 'SET_SIGNIN',
     payload: { email, password }
+});
+export const setVendorSignin = (vendorEmail,vendorPassword) => ({
+    type:'SET_VENDORSIGNIN',
+    payload:{vendorEmail,vendorPassword}
 });
 
 export const logout = () => ({
     type: 'LOGOUT'
 });
+export const vendorLogout = () => ({
+    type:'SET_LOGOUT'
+})
 
 export const addToCart = (item) => ({
     type: 'SET_ADDTOCART',
@@ -34,3 +46,14 @@ export const setTotalPrice = (totalPrice) => ({
 export const clearTotalPrice = () => ({
     type: 'CLEAR_TOTAL_PRICE'
 });
+
+export const setAddProduct = (item) => ({
+    type: 'SET_ADD_PRODUCT',
+    payload: item
+})
+export const removeProduct = (index) => {
+    return {
+        type: 'REMOVE_PRODUCT',
+        payload: index,
+    };
+};
