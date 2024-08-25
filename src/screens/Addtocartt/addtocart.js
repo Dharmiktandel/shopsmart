@@ -25,10 +25,13 @@ const Addtocart = () => {
     // Access authentication state from Redux store
     const isAuthenticated = useSelector(state => state.signuped.isAuthenticate);
     console.log('isAuthenticated', isAuthenticated);
+    const emails = useSelector(state => state.signuped.user.email);
+    console.log('emailsemails',emails);
+    
 
     const handleAddToCart = () => {
         if (isAuthenticated && item) {
-            dispatch(addToCart(item));
+            dispatch(addToCart(emails, item));
             navigate('/productDetail');
         } else {
             navigate('/signin');

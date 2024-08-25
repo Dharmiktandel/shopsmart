@@ -9,7 +9,11 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const cartDesc = useSelector(state => state.addtocartt.addtocartItems);
+  const emails = useSelector(state => state.signuped.user.email);
+  console.log('emailsssssssss',emails);
+  
+  const cartDesc = useSelector(state => state.addtocartt.addtocartItems[emails] || []);
+ 
   console.log('cartDesccartDesc',cartDesc);
   
   const isAuthenticate = useSelector(state => state.signuped.isAuthenticate);

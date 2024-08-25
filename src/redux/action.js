@@ -25,13 +25,16 @@ export const setVendorSignin = (vendorEmail,vendorPassword) => ({
 export const logout = () => ({
     type: 'LOGOUT'
 });
+export const clearCart = () => ({
+    type: 'CLEAR_CART'
+});
 export const vendorLogout = () => ({
     type:'SET_LOGOUT'
 })
 
-export const addToCart = ( item) => ({
+export const addToCart = (emails, item) => ({
     type: 'SET_ADDTOCART',
-    payload:  item
+    payload:  {emails, item}
 });
 
 export const removeFromCart = (itemId) => ({

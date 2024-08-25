@@ -41,8 +41,9 @@ const Navbar = () => {
 
     const handleLogout = () => {
         
-       
+        dispatch(clearCart())
         dispatch(logout());
+        
         
         navig("/signin"); // Redirect to the signin page after logout
     };

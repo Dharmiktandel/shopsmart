@@ -120,16 +120,38 @@ const vendorSignupReducer = (state = vendorSignupInitialState,action) => {
 // Reducer for cart actions
 const addtocartReducer = (state = addtocartInitialState, action) => {
     switch (action.type) {
-        case 'SET_ADDTOCART':
+        case 'SET_ADDTOCART': {
+            const { emails, item } = action.payload;
             return {
                 ...state,
-                addtocartItems: [...state.addtocartItems, action.payload]
+                addtocartItems: {
+                    ...state.addtocartItems,
+                    [emails]: [...(state.addtocartItems[emails] || []), item]
+                }
             };
-        case 'REMOVE_FROM_CART':
+        }
+        
+        case 'CLEAR_CART': {
             return {
                 ...state,
-                addtocartItems: state.addtocartItems.filter(item => item.id !== action.payload)
+                addtocartItems: {
+                    ...state.addtocartItems,
+                    [action.payload]: [], // Clear cart for the specific user
+                }
             };
+        }
+        
+        case 'REMOVE_FROM_CART': {
+            const { emails, itemId } = action.payload;
+            return {
+                ...state,
+                addtocartItems: {
+                    ...state.addtocartItems,
+                    [emails]: state.addtocartItems[emails].filter(item => item.id !== itemId)
+                }
+            };
+        }
+        
         default:
             return state;
     }
