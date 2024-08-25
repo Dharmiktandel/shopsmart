@@ -143,14 +143,27 @@ const addtocartReducer = (state = addtocartInitialState, action) => {
         
         case 'REMOVE_FROM_CART': {
             const { emails, itemId } = action.payload;
+            console.log("Emails:", emails);
+            console.log("ItemId:", itemId);
+            
+            const userCart = state.addtocartItems[emails] || []; // Ensure it's an array
+            console.log("Current Cart:", userCart);
+            
+            // Filter out the item by its id
+            const updatedCart = userCart.filter(item => item.id !== itemId);
+            console.log("Updated Cart:", updatedCart);
+        
             return {
                 ...state,
                 addtocartItems: {
                     ...state.addtocartItems,
-                    [emails]: state.addtocartItems[emails].filter(item => item.id !== itemId)
+                    [emails]: updatedCart.length > 0 ? updatedCart : [] // Handle empty cart
                 }
             };
         }
+        
+        
+        
         
         default:
             return state;

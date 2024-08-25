@@ -44,10 +44,19 @@ const ProductDetail = () => {
   };
 
   const handleRemove = (index) => {
-    dispatch(removeFromCart(cartDesc[index].id));
+    // Log the index and item ID for debugging
+    console.log("Removing item at index:", index);
+    console.log("Item ID:", cartDesc[index].id);
+    
+    // Dispatch the removeFromCart action
+    dispatch(removeFromCart( emails, cartDesc[index].id));
+    
+    // Update quantities state
     const newQuantities = quantities.filter((_, i) => i !== index);
+    console.log("Updated Quantities:", newQuantities);
     setQuantities(newQuantities);
-  };
+};
+
 
   const gotobilling = () => {
     const detailedItems = cartDesc.map((item, index) => ({
