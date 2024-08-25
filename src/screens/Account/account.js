@@ -35,7 +35,7 @@ const Account = () => {
                 <div className="rootcontainer">
                     <div className="leftsidediv">
                         <div className="Profile">
-                            <img style={{ width: 30, height: 40 }} src={loggedInUser.image ? URL.createObjectURL(loggedInUser.image) : 'defaultImagePath.jpg'} alt="User" />
+                            <img style={{ width: 50, height: 50, borderRadius:5 }} src={loggedInUser.image ? URL.createObjectURL(loggedInUser.image) : 'defaultImagePath.jpg'} alt="User" />
                             <div>
                                 <span style={{ paddingLeft: 25 }}>Hello,</span>
                                 <br />

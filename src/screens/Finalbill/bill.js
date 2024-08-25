@@ -17,6 +17,12 @@ const Bill = () => {
     setIsHovered(false);
   };
 
+  const handleShareOrder = () => {
+    const orderDetails = `Order Details: Total Price: ₹${totalPrice.toFixed(2)}\nItems: ${fetchCartDetails.map(cartItem => `${cartItem.title ? cartItem.title : cartItem.name} - ₹${cartItem.totalPrice.toFixed(2)}`).join("\n")}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(orderDetails)}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
     <div style={{
       height: '100%',
@@ -50,6 +56,7 @@ const Bill = () => {
             <button
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
+              onClick={handleShareOrder}
               style={{
                 fontSize: 17,
                 borderTop: "none",
@@ -70,8 +77,10 @@ const Bill = () => {
             {fetchCartDetails?.map((cartItem) => (
               <div key={cartItem.id} style={{ }}>
                 <div style={{ display: "flex", flexDirection: "row" , }}>
-                  <img style={{ height: 35, width: 35 }} src={cartItem.thumbnail} alt="item-thumbnail" />&nbsp;&nbsp;&nbsp;&nbsp;
-                  <span style={{ color: "#000", fontSize: 20, fontWeight: '500', width: 500 }}>{cartItem.title}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <img style={{ height: 35, width: 35 }} 
+                  src={typeof cartItem.imagePreviewUrl === 'string' ? cartItem.imagePreviewUrl : (cartItem.imagePreviewUrl ? URL.createObjectURL(cartItem.imagePreviewUrl) : cartItem.thumbnail)} 
+                  alt="item-thumbnail" />&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span style={{ color: "#000", fontSize: 20, fontWeight: '500', width: 500 }}>{cartItem.title ? cartItem.title : cartItem.name}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <span style={{ color: "#000", fontSize: 20, fontWeight: 500 }}>₹ {cartItem.totalPrice.toFixed(2)}</span>
                 </div>
               </div>

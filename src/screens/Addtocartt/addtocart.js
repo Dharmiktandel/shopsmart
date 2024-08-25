@@ -4,12 +4,23 @@ import Navbar from "../../components/Navbar/Navbar";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/action";
+import { useState } from "react";
 
 const Addtocart = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
     const { item } = location.state || {}; // Use default empty object if location.state is undefined
+    console.log('item',item);
+
+
+    
+    const [expanded, setExpanded] = useState(false);
+    const toggleDescriptionExpansion = () => {
+        setExpanded(!expanded);
+    };
+
+    
 
     // Access authentication state from Redux store
     const isAuthenticated = useSelector(state => state.signuped.isAuthenticate);
@@ -27,44 +38,59 @@ const Addtocart = () => {
    
 
     return (
-        <div style={{height: '100%',
+        <div style={{
+      height: '100%',
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor:"white"}} >
+      backgroundColor:"white"}}>
             
             <Navbar />
 
              {/* <div className="addtocartmaincontainer">  */}
-                <div className="addtocartsubconatiner">
-                    <div className="small-img">
-                        {item.images?.map((productImage, index) => (
-                            <img
-                                key={index}
-                                style={{ height: 60, width: 60, backgroundColor: "white", marginTop: 10, marginLeft: 15, marginBottom:10,}}
-                                src={productImage}
-                                alt={`product-${index}`}
-                            />
-                        ))}
-                    </div>
+                <div className="addtocartttsubconatiner">
+                    
+                <div className="small-img">
+    {item.images?.map((productImage, index) => (
+        
+        <img
+            key={index}
+            style={{ height: 60, width: 60, backgroundColor: "white", marginTop: 10 }}
+            src={productImage}
+            alt={`product-${index}`}
+        />
+    ))}
+    
+    
+</div>
                     <div className="main-img">
-                        <img
-                            style={{ height: 230, width: 230, backgroundColor: "white" }}
-                            src={item.thumbnail}
-                            alt="main-thumbnail"
-                        />
+                         <img
+        style={{ height: 230, width: 230, backgroundColor: "white" }}
+        src={ typeof item.imagePreviewUrl === 'string' ? item.imagePreviewUrl : (item.imagePreviewUrl ? URL.createObjectURL(item.imagePreviewUrl) : item.thumbnail )}
+        alt="main-thumbnail"
+    />
                     </div>
-                    <div style={{ paddingTop: 20 }}>
+                    <div style={{ paddingTop: 20,width:350,height:350}}>
                         <span style={{ color: "#000", fontSize: 18, fontWeight: '500' }}>
-                            {item.title}
+                            
+                        {item.title ? item.title : item.name}
                         </span>
                         <br />
                         <span style={{ color: "#000", fontSize: 18, fontWeight: '500' }}>
-                            {item.description}
+                        {expanded
+                            ? item.description
+                            : `${item.description.substring(0, 50)}...`
+                        }
+                        <span
+                            onClick={toggleDescriptionExpansion}
+                            style={{ color: "blue", cursor: "pointer", marginLeft: 5 }}
+                        >
+                            {expanded ? "Show less" : "Show more"}
+                        </span>
                         </span>
                         <br />
                         <span style={{ color: "grey", fontSize: 15 }}>
-                            STORE: INFINITY WORKS
+                            STORE: Infinity Works
                         </span>
                         <br />
                         <span style={{ color: "orange", fontWeight: '700', fontSize: 15 }}>

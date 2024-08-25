@@ -100,3 +100,22 @@ yarn-error.log*
 
                 
 #             </div> */}
+
+#  // const [expandedRows, setExpandedRows] = useState({});
+#     // const toggleRowExpansion = (rowIndex) => {
+#     //     setExpandedRows((prevState) => ({
+#     //         ...prevState,
+#     //         [rowIndex]: !prevState[rowIndex],
+#     //     }));
+#     // };
+#  {
+#                             expandedRows[indexxx]
+#                                             ? item.description
+#                                             : `${item.description.substring(0, 50)}...`
+#                         }
+#                                             <span
+#                                             onClick={() => toggleRowExpansion(index)}
+#                                             style={{ color: "blue", cursor: "pointer", marginLeft: 5 }}
+#                                         >
+#                                             {expandedRows[indexxx] ? "Show less" : "Show more"}
+#                                         </span>

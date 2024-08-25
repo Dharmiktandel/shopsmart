@@ -42,8 +42,8 @@
 
 
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import bannerrr from "../../assets/banner-2.png"
 
 const VendorShop = () => {
@@ -54,12 +54,22 @@ const VendorShop = () => {
     const location = useLocation()
     const {productimage, category} = location.state || {}
     console.log('productimage',productimage);
+
+    const [expandedRows, setExpandedRows] = useState({});
+
+    const toggleRowExpansion = (rowIndex) => {
+        setExpandedRows((prevState) => ({
+            ...prevState,
+            [rowIndex]: !prevState[rowIndex],
+        }));
+    };
     
     
     const products = useSelector((state) => state.vendorAddproducts.vendorItem);
     console.log('Products:', products);
     
     const [shopProducts, setShopProducts] = useState([]);
+    const redirect = useNavigate()
 
     useEffect(() => {
         console.log('Filtering products for:', decodedShopName);
@@ -77,6 +87,10 @@ const VendorShop = () => {
         setShopProducts(filteredProducts);
         console.log('Filtered products:', filteredProducts);
     }, [decodedShopName, products]);
+
+    const productdtl = (item)=> {
+        redirect("/addtocart", { state: { item } })
+     }
     
 
     return (
@@ -84,27 +98,57 @@ const VendorShop = () => {
         <div style={{display:"flex",flexDirection:"column",marginLeft:200,marginTop:50}}>
             <img style={{height:400,width:"80%",}}src={productimage === 'string' ? productimage : (productimage ? URL.createObjectURL(productimage) : 'defaultImagePath.jpg')} alt="imggg"></img>
              <span style={{fontSize:30,fontWeight:550}}>{shopname}</span>
-             <span style={{fontSize:20}}>{category}</span>
+             <span style={{fontSize:20,color:"gray",fontSize:20}}>{category}</span>
             </div>
             <hr style={{width:"70%",marginLeft:190}}></hr>
-            <h2>Products from Shop {shopname} owner</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+            <div style={{display:"flex",flexDirection:"row"}}>
+//            <div style={{marginLeft:200}}>
+            <h2>Order Online</h2>
+            <div style={{  gap: '1px',marginTop:10 }}>
                 {shopProducts.length > 0 ? (
                     shopProducts.map((product) => (
-                        <div key={product.id} className="product-card">
-                            <img
+                        <div key={product.id} style={{
+                            display:'flex',
+                            flexDirection:'row',
+                            width:400,
+                            justifyContent:'space-between',
+                            marginTop:25
+                            
+                        }}>
+                        <button onClick={()=>productdtl(product)} style={{height:150,width:200,borderRadius: 10 }}>
+                        <img
                                 style={{ height: 150, width: 200, borderRadius: 10 }}
                                 src={product.imagePreviewUrl || 'defaultProductImage.jpg'}
                                 alt={product.name}
                             />
-                            <h3>{product.name}</h3>
-                            <p>{product.description}</p>
-                            <p>Price: ${product.price}</p>
+                        </button>
+                           
+                            <div style={{
+                                marginLeft:23
+                            }}>
+                            <h3 style={{color:'black',fontSize:25,fontWeight:'551'}}>{product.name}</h3>
+                            <p style={{color:'grey',fontFamily:'serif',fontSize:15}}>
+                            {expandedRows[product.id]
+                                                    ? product.description
+                                                    : `${product.description.substring(0, 25)}...`}
+                                                <span
+                                                    onClick={() => toggleRowExpansion(product.id)}
+                                                    style={{ color: "blue", cursor: "pointer", marginLeft: 5 }}
+                                                >
+                                                    {expandedRows[product.id] ? "Show less" : "Show more"}
+                                                </span>
+                            </p>
+                            <p style={{
+                                fontSize:14
+                            }}>Price: ₹{product.price}</p>
+                            </div>
                         </div>
                     ))
                 ) : (
                     <p>No products available for this shop.</p>
                 )}
+            </div>
+            </div>
             </div>
         </div>
     );

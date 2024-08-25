@@ -35,6 +35,7 @@
   
   .product-info {
     padding-left: 20px;
+    
   }
   
   .quantity-button {
@@ -94,6 +95,10 @@
     border: 1px solid #e0e0e0;
     cursor: pointer;
     margin-top: 5px;
+  }
+
+  .desprtotalign{
+    margin-top: 10px;
   }
   
   /* productdetails.css */

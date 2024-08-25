@@ -32,6 +32,9 @@ const cartDetailsInitialState = {
 const vendorNewProductInitialState = {
     vendorItem : []
 }
+const placedOrderInitialState = {
+    newPlacedOrder : []
+}
 
 // Reducer for signup actions
 const signupReducer = (state = signupInitialState, action) => {
@@ -162,6 +165,19 @@ const cartDetailsReducer = (state = cartDetailsInitialState, action) => {
     }
 };
 
+const placedOrderedReducer = (state = placedOrderInitialState, action ) => {
+    switch (action.type) {
+        case 'SET_PLACE_ORDER':
+            return {
+             ...state,
+             newPlacedOrder:[...state.newPlacedOrder ,action.payload]
+            }
+            default:
+                return state;
+    }
+
+};
+
 // Combine reducers
 const rootReducer = combineReducers({
     signuped: signupReducer,
@@ -169,7 +185,8 @@ const rootReducer = combineReducers({
     totalPrice: totalPriceReducer ,
     cartDetails: cartDetailsReducer,
     vendorsignuped:vendorSignupReducer,
-    vendorAddproducts : addVendorsNewProductReducer
+    vendorAddproducts : addVendorsNewProductReducer,
+    newPlacedOrdereddd : placedOrderedReducer
 });
 
 export default rootReducer;

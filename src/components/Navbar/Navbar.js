@@ -4,12 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Navbar.css";
 import logo from '../../assets/shopp.jpg';
 import search from "../../assets/searchIcon.png";
-import { logout } from "../../redux/action";
+import { clearCart, logout } from "../../redux/action";
 import axios from "axios";
 
 const Navbar = () => {
     const dispatch = useDispatch();
     const isAuthenticate = useSelector((state) => state.signuped.isAuthenticate);
+   
     
     const [showModal, setShowModal] = useState(false);
     const [searchProduct, setSearchProduct] = useState([]);
@@ -39,7 +40,10 @@ const Navbar = () => {
     }, [searchQuery]);
 
     const handleLogout = () => {
+        
+       
         dispatch(logout());
+        
         navig("/signin"); // Redirect to the signin page after logout
     };
 

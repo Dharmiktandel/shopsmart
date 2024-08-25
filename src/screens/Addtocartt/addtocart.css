@@ -10,13 +10,18 @@
     display: flex;
     flex-direction: column;
     /* border: groove; */
-      width: 200px;
+      width: 120px;
+      height: 350px;
     background-color: #f2f2f2;
+    align-items: center;
+    /* padding-top: 10px; */
+    padding-bottom: 10px;
+    
     /* padding-left: 10px;
     padding-top: 10px; */
     
 }
-.addtocartsubconatiner{
+.addtocartttsubconatiner{
 
     /* background-color: white;
      padding-top: 100px;
@@ -37,10 +42,11 @@
 }
 .main-img{
     background-color: #f2f2f2;
-    width:700px;
-   align-items: center;
-   justify-content: center;
-   display: flex;
+    height: 350px;
+    width:500px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 20px;

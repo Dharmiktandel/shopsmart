@@ -38,8 +38,10 @@ const Products = () => {
             {
               allProduct.map((item)=> (
             <button key={item.id} onClick={()=> productdtl(item)} className="btnproduct">
-            <img style={{height:200,width:370}} src={item.thumbnail} alt="product thumbnail"></img>
-            <span style={{fontWeight:'700',fontSize:20}}>{item.title}</span>
+            <img style={{height:200,width:370}} 
+             src={ typeof item.imagePreviewUrl === 'string' ? item.imagePreviewUrl : (item.imagePreviewUrl ? URL.createObjectURL(item.imagePreviewUrl) : item.thumbnail )}
+            alt="product thumbnail"></img>
+            <span style={{fontWeight:'700',fontSize:20}}>{item.title }</span>
             <span style={{fontWeight:'400',fontSize:15,textAlign:'left'}}>{item.description}</span>
             <span style={{color:"red",fontWeight:1000}}>{item.price}</span>
             </button> 

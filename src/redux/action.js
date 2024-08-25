@@ -1,5 +1,7 @@
 // src/redux/action.js
 
+import { type } from "@testing-library/user-event/dist/type";
+
 // Existing actions
 export const setRegisterdata = (item) => ({
     type: 'SET_SIGNUP',
@@ -27,9 +29,9 @@ export const vendorLogout = () => ({
     type:'SET_LOGOUT'
 })
 
-export const addToCart = (item) => ({
+export const addToCart = ( item) => ({
     type: 'SET_ADDTOCART',
-    payload: item
+    payload:  item
 });
 
 export const removeFromCart = (itemId) => ({
@@ -57,3 +59,11 @@ export const removeProduct = (index) => {
         payload: index,
     };
 };
+export const setPlacedOrder = (item) => {
+    return{
+        type:'SET_PLACE_ORDER',
+        payload:item
+    }
+}
+
+
