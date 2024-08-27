@@ -9,14 +9,24 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const emails = useSelector(state => state.signuped.user.email);
-  console.log('emailsssssssss',emails);
+  // const emails = useSelector(state => state.signuped.user.email);
+  // console.log('emailsssssssss',emails);
   
-  const cartDesc = useSelector(state => state.addtocartt.addtocartItems[emails] || []);
+  // const cartDesc = useSelector(state => state.addtocartt.addtocartItems[emails] || []);
  
-  console.log('cartDesccartDesc',cartDesc);
+  // console.log('cartDesccartDesc',cartDesc);
   
-  const isAuthenticate = useSelector(state => state.signuped.isAuthenticate);
+  // const isAuthenticate = useSelector(state => state.signuped.isAuthenticate);
+
+
+  const emails = useSelector(state => state.signuped.user?.email);
+  console.log('emailsssssssss',emails);
+const cartDesc = useSelector(state => emails ? (state.addtocartt.addtocartItems[emails] || []) : []);
+console.log('cartDesccartDesc',cartDesc);
+const isAuthenticate = useSelector(state => state.signuped.isAuthenticate);
+
+// Rest of your code...
+
   
 
   const [quantities, setQuantities] = useState(cartDesc.map(() => 1));
@@ -43,18 +53,37 @@ const ProductDetail = () => {
     return cartDesc.reduce((total, item, index) => total + getTotalPrice(index), 0);
   };
 
-  const handleRemove = (index) => {
-    // Log the index and item ID for debugging
-    console.log("Removing item at index:", index);
-    console.log("Item ID:", cartDesc[index].id);
+//   const handleRemove = (index) => {
+//     // Log the index and item ID for debugging
+//     console.log("Removing item at index:", index);
+//     console.log("Item ID:", cartDesc[index].id);
     
-    // Dispatch the removeFromCart action
-    dispatch(removeFromCart( emails, cartDesc[index].id));
+//     // Dispatch the removeFromCart action
+//     dispatch(removeFromCart( emails, cartDesc[index].id));
     
-    // Update quantities state
-    const newQuantities = quantities.filter((_, i) => i !== index);
-    console.log("Updated Quantities:", newQuantities);
-    setQuantities(newQuantities);
+//     // Update quantities state
+//     const newQuantities = quantities.filter((_, i) => i !== index);
+//     console.log("Updated Quantities:", newQuantities);
+//     setQuantities(newQuantities);
+// };
+
+
+
+const [cartDescr, setCartDescr] = useState([]);
+
+const handleRemove = (index) => {
+  console.log("Removing item at index:", index);
+  
+  // Dispatch the removeFromCart action with the index
+  dispatch(removeFromCart(emails, index));
+  
+  // Update quantities state
+  const newQuantities = quantities.filter((_, i) => i !== index);
+  setQuantities(newQuantities);
+
+  // Optionally update the cart state locally
+  const updatedCart = cartDesc.filter((_, i) => i !== index);
+  setCartDescr(updatedCart);
 };
 
 
@@ -67,6 +96,7 @@ const ProductDetail = () => {
 
     dispatch(setTotalPrice(getGrandTotalPrice()));
     dispatch({ type: 'SET_CART_DETAILS', payload: detailedItems });
+    console.log('setcartdetaillllll',detailedItems);
     navigate("/order", { state: { items: detailedItems } });
   };
 

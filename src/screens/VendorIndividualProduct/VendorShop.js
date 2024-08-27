@@ -106,11 +106,11 @@ const VendorShop = () => {
             <h2>Order Online</h2>
             <div style={{  gap: '1px',marginTop:10 }}>
                 {shopProducts.length > 0 ? (
-                    shopProducts.map((product) => (
-                        <div key={product.id} style={{
+                    shopProducts.map((product, index) => (
+                        <div key={index} style={{
                             display:'flex',
                             flexDirection:'row',
-                            width:400,
+                            width:350,
                             justifyContent:'space-between',
                             marginTop:25
                             
@@ -128,14 +128,14 @@ const VendorShop = () => {
                             }}>
                             <h3 style={{color:'black',fontSize:25,fontWeight:'551'}}>{product.name}</h3>
                             <p style={{color:'grey',fontFamily:'serif',fontSize:15}}>
-                            {expandedRows[product.id]
+                            {expandedRows[index]
                                                     ? product.description
                                                     : `${product.description.substring(0, 25)}...`}
                                                 <span
-                                                    onClick={() => toggleRowExpansion(product.id)}
+                                                    onClick={() => toggleRowExpansion(index)}
                                                     style={{ color: "blue", cursor: "pointer", marginLeft: 5 }}
                                                 >
-                                                    {expandedRows[product.id] ? "Show less" : "Show more"}
+                                                    {expandedRows[index] ? "Show less" : "Show more"}
                                                 </span>
                             </p>
                             <p style={{

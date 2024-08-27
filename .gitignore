@@ -119,3 +119,37 @@ yarn-error.log*
 #                                         >
 #                                             {expandedRows[indexxx] ? "Show less" : "Show more"}
 #                                         </span>
+
+#  // const handleFormSubmit = (e) => {
+#     //     e.preventDefault();
+
+#     //     // Add the new product to the list of products
+#     //     setProducts([...products, newProduct]);
+
+#     //     dispatch(setAddProduct(newProduct))
+#     //     console.log('newProductnewProduct', newProduct)
+
+#     //     // Reset the newProduct state to clear the form fields
+#     //     setNewProduct({
+#     //         name: "",
+#     //         description: "",
+#     //         price: "",
+#     //         returnPolicy: "",
+#     //         image: null,
+#     //         imagePreviewUrl: null,
+#     //     });
+
+
+
+#     // };
+
+# // State to manage the list of products
+#     // const [products, setProducts] = useState([
+#     //     // {
+#     //     //     name: "Smart Watch",
+#     //     //     description: "It is a very smart product. In this, we can do multiple functionalities such as tracking fitness, receiving notifications, and more. It is highly durable and comes with a sleek design.",
+#     //     //     price: 4000,
+#     //     //     returnPolicy: "10 days",
+#     //     // },
+#     //     // // Add more products as needed
+#     // ]);

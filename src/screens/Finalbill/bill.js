@@ -36,23 +36,24 @@ const Bill = () => {
         <div className="topdiv">
           <img style={{ marginBottom: 20 }} src={rewardd} alt="rew" />
           <div>
-            <h1 style={{ color: "blue" }}>Order placed for ₹{totalPrice.toFixed(2)}</h1>
-            <p>Your item will be delivered soon</p>
+            <h1 style={{ color: "blue",fontFamily:"-moz-initial"}}>Order placed for ₹{totalPrice.toFixed(2)}</h1>
+            <p style={{fontFamily:"-moz-initial",fontSize:15}}>Your item will be delivered soon</p>
           </div>
         </div>
         <div className="middlediv">
           <div style={{ marginTop: 20, marginLeft: 20, width: 450, marginBottom: 20 }}>
-            <h4 style={{ fontWeight: 800 }}>Delivery Address</h4>
-            <span style={{ fontWeight: 550 }}>Name: {billingDetails?.name}</span><br />
-            <span>Street Address: {billingDetails?.streetAddress}</span><br />
-            <span>Floor: {billingDetails?.apartment}</span><br />
-            <span>City: {billingDetails?.city}</span><br />
-            <span>Phone number: {billingDetails?.phone}</span><br />
-            <span>Email: {billingDetails?.email}</span>
+            <h4 style={{ fontWeight: 800,fontFamily:"-moz-initial" }}>Delivery Address</h4>
+            <span style={{ fontWeight: 550,fontFamily:"-moz-initial" }}>Name: {billingDetails?.name}</span><br />
+            <span style={{fontFamily:"-moz-initial"}}>Street Address: {billingDetails?.streetAddress}</span><br />
+            <span style={{fontFamily:"-moz-initial"}}>Floor: {billingDetails?.apartment}</span><br />
+            <span style={{fontFamily:"-moz-initial"}}>City: {billingDetails?.city}</span><br />
+            <span style={{fontFamily:"-moz-initial"}}>Phone number: {billingDetails?.phone}</span><br />
+            <span style={{fontFamily:"-moz-initial",}}>Email:</span>
+            <span style={{fontFamily:"-moz-initial",color:"blue"}}>{billingDetails?.email}</span>
           </div>
           <hr style={{ border: "solid ", height: "90%" }} />
           <div style={{ marginTop: 40 }}>
-            <span style={{ fontSize: 19 }}>Share order details </span>
+            <span style={{ fontSize: 19,fontFamily:"-moz-initial" }}>Share order details </span>
             <button
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
@@ -64,7 +65,9 @@ const Bill = () => {
                 borderRight: "none",
                 borderBlockColor: "gray",
                 background: isHovered ? 'blue' : 'white',
-                color: isHovered ? "white" : "blue"
+                color: isHovered ? "white" : "blue",
+                fontFamily:"-moz-initial"
+
               }}>
               Share Order
             </button><br /><br />

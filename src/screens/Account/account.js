@@ -37,37 +37,37 @@ const Account = () => {
                         <div className="Profile">
                             <img style={{ width: 50, height: 50, borderRadius:5 }} src={loggedInUser.image ? URL.createObjectURL(loggedInUser.image) : 'defaultImagePath.jpg'} alt="User" />
                             <div>
-                                <span style={{ paddingLeft: 25 }}>Hello,</span>
+                                <span style={{ paddingLeft: 25,fontFamily:"-moz-initial" }}>Hello,</span>
                                 <br />
-                                <span style={{ paddingLeft: 25, fontWeight: 1000, fontSize: 20 }}>
+                                <span style={{ paddingLeft: 25, fontWeight: 1000, fontSize: 20,fontFamily:"-moz-initial" }}>
                                     {`${loggedInUser.firstname} ${loggedInUser.lastname}`}
                                 </span>
                             </div>
                         </div>
                         <div className="accountsetting">
-                            <h3 style={{ paddingTop: 10, paddingLeft: 20,fontWeight:550 }}>MY ORDERS</h3>
+                            <h3 style={{ paddingTop: 10, paddingLeft: 20,fontWeight:550,fontFamily:"-moz-initial" }}>MY ORDERS</h3>
                             <hr />
-                            <h3 style={{ paddingLeft: 20,fontWeight:550 }}>ACCOUNT SETTINGS</h3>
-                            <ul style={{ paddingLeft: 40, listStyle: "none" }}>
-                                <li>Profile Information</li>
-                                <li>Manage Address</li>
-                                <li>Pan Card Information</li>
+                            <h3 style={{ paddingLeft: 20,fontWeight:550,fontFamily:"-moz-initial" }}>ACCOUNT SETTINGS</h3>
+                            <ul style={{ paddingLeft: 40,paddingTop:5  }}>
+                                <li style={{fontSize:15,fontFamily:"-moz-initial"}}>Profile Information</li>
+                                <li style={{fontSize:15,fontFamily:"-moz-initial"}}>Manage Address</li>
+                                <li style={{fontSize:15,fontFamily:"-moz-initial"}}>Pan Card Information</li>
                             </ul>
                         </div>
                     </div>
                     <div className="rightsidediv">
-                        <h2 style={{ fontWeight: 800,fontFamily:"sans-serif" }}>Personal Information</h2>
-                        <span style={{ fontSize: 15, fontWeight: 500 }}>First Name:</span>&nbsp;
-                        <span style={{ fontSize: 20 }}>{loggedInUser.firstname}</span>
+                        <h2 style={{ fontWeight: 800,fontFamily:"-moz-initial" }}>Personal Information</h2>
+                        <span style={{ fontSize: 20, fontWeight: 500,fontFamily:"-moz-initial",color:"gray" }}>First Name:</span>&nbsp;
+                        <span style={{ fontSize: 20,fontFamily:"-moz-initial" }}>{loggedInUser.firstname}</span>
                         <br />
-                        <span style={{ fontSize: 15, fontWeight: 500 }}>Last Name:</span>&nbsp;
-                        <span style={{ fontSize: 20 }}>{loggedInUser.lastname}</span>
+                        <span style={{ fontSize: 20, fontWeight: 500,fontFamily:"-moz-initial",color:"gray" }}>Last Name:</span>&nbsp;
+                        <span style={{ fontSize: 20,fontFamily:"-moz-initial" }}>{loggedInUser.lastname}</span>
                         <br /><br />
-                        <h2 style={{ fontWeight: 800,fontFamily:"sans-serif" }}>Email Address</h2>
-                        <span style={{ fontSize: 20 }}>{loggedInUser.email}</span>
+                        <h2 style={{ fontWeight: 800,fontFamily:"-moz-initial" }}>Email Address</h2>
+                        <span style={{ fontSize: 20,fontFamily:"-moz-initial",color:"blue" }}>{loggedInUser.email}</span>
                         <br /><br />
-                        <h2 style={{ fontWeight: 800,fontFamily:"sans-serif" }}>Mobile Number</h2>
-                        <span style={{ fontSize: 20 }}>{loggedInUser.phone}</span>
+                        <h2 style={{ fontWeight: 800,fontFamily:"-moz-initial" }}>Mobile Number</h2>
+                        <span style={{ fontSize: 20,fontFamily:"-moz-initial" }}>{loggedInUser.phone}</span>
                     </div>
                 </div>
             </div>

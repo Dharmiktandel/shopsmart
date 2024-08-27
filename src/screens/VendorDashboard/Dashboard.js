@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./Dashboard.css";
+import searchh from "../../assets/searchIcon.png"
 import userrr from "../../assets/userr.png";
 import store from "../../assets/store.jpg";
 import uu from "../../assets/userr.png";
@@ -24,18 +25,51 @@ const Dashboard = () => {
     console.log("upcomingPlacedOrderupcomingPlacedOrderupcomingPlacedOrder", upcomingPlacedOrder);
 
 
+    
+
 
     const productss = useSelector((state) => state.vendorAddproducts.vendorItem);
     //const stayProduct = useSelector((state) => state.vendorsignuped.isAuthenticate)
-    console.log("vendoraccount", vendorAccount);
+    console.log("vendoraddproductsss", productss);
     const products = productss.filter(product => product.addedByEmail === vendorAccount.vendorEmail && product.addedByShopName === vendorAccount.shopname);
 
 
-    const [activeItem, setActiveItem] = useState("Home");
+    const filteredOrders = upcomingPlacedOrder.filter(order => {
+    // Assuming `addedByShopName` is found in `fetchCartDetails[0]` for example:
+    const orderShopName = order.fetchCartDetails?.[0]?.addedByShopName?.toLowerCase();
+    const vendorShopName = vendorAccount.shopname.toLowerCase();
+
+    return orderShopName === vendorShopName;
+});
+
+console.log('Filtered Orders:', filteredOrders);
+
+    
+    const filteredProducts = productss.filter(product => {
+        console.log(`Checking product: ${product.name}`);
+        console.log(`Product email: ${product.addedByEmail}, Vendor email: ${vendorAccount.vendorEmail}`);
+        console.log(`Product shop name: ${product.addedByShopName}, Vendor shop name: ${vendorAccount.shopname}`);
+    
+        return product.addedByEmail.toLowerCase() === vendorAccount.vendorEmail.toLowerCase() &&
+               product.addedByShopName.toLowerCase() === vendorAccount.shopname.toLowerCase();
+    });
+    
+    console.log('Filtered Products:', filteredProducts);
+
+    upcomingPlacedOrder.forEach(order => {
+        console.log(`Order email: ${order.getNameEmailData?.email}, Vendor email: ${vendorAccount.vendorEmail}`);
+    });
+    
+    console.log('Filtered Orders:', filteredOrders);
+    
+
+    const [activeItem, setActiveItem] = useState("Dashboard");
     const [expandedRows, setExpandedRows] = useState({});
 
     const dispatch = useDispatch()
     const nav = useNavigate()
+
+
 
 
 
@@ -50,23 +84,26 @@ const Dashboard = () => {
     const [images, setImages] = useState([]);
     const maxNumber = 4; // Limit the number of images that can be uploaded
 
+    // const onChange = (imageList, addUpdateIndex) => {
+    //     // data for submit
+    //     console.log(imageList, addUpdateIndex);
+    //     setImages(imageList);
+    // };
+
+
     const onChange = (imageList, addUpdateIndex) => {
-        // data for submit
-        console.log(imageList, addUpdateIndex);
+        // Update images in the component state
         setImages(imageList);
+        
+        // Update the newProduct state with the images
+        setNewProduct((prevProduct) => ({
+            ...prevProduct,
+            images: imageList, // Store the list of images
+        }));
     };
 
 
-    // State to manage the list of products
-    // const [products, setProducts] = useState([
-    //     // {
-    //     //     name: "Smart Watch",
-    //     //     description: "It is a very smart product. In this, we can do multiple functionalities such as tracking fitness, receiving notifications, and more. It is highly durable and comes with a sleek design.",
-    //     //     price: 4000,
-    //     //     returnPolicy: "10 days",
-    //     // },
-    //     // // Add more products as needed
-    // ]);
+    
 
     // State to manage the new product form inputs
     const [newProduct, setNewProduct] = useState({
@@ -76,7 +113,9 @@ const Dashboard = () => {
         returnPolicy: "",
         image: null, // Add image field
         imagePreviewUrl: null, // Add image preview URL fie
-        imageList: null
+        images:null
+        //imageList: null
+        //images: null
     });
 
 
@@ -109,28 +148,7 @@ const Dashboard = () => {
 
 
 
-    // const handleFormSubmit = (e) => {
-    //     e.preventDefault();
-
-    //     // Add the new product to the list of products
-    //     setProducts([...products, newProduct]);
-
-    //     dispatch(setAddProduct(newProduct))
-    //     console.log('newProductnewProduct', newProduct)
-
-    //     // Reset the newProduct state to clear the form fields
-    //     setNewProduct({
-    //         name: "",
-    //         description: "",
-    //         price: "",
-    //         returnPolicy: "",
-    //         image: null,
-    //         imagePreviewUrl: null,
-    //     });
-
-
-
-    // };
+   
 
 
     const handleLogout = () => {
@@ -141,17 +159,43 @@ const Dashboard = () => {
 
 
     // Handle form submission to add a new product
+    // const handleFormSubmit = (e) => {
+    //     e.preventDefault();
+    //     const productWithVendorEmail = {
+    //         ...newProduct,
+            
+    //         addedByEmail: vendorAccount.
+    //         vendorEmail, // Add vendor's email to the product
+    //         addedByShopName: vendorAccount.shopname
+    //     }
+    //     dispatch(setAddProduct(productWithVendorEmail));
+  
+    //     //dispatch(setAddProduct(newProduct))
+    //     // setProducts([...products,newProduct]);
+    //     setNewProduct({
+    //         name: "",
+    //         description: "",
+    //         price: "",
+    //         returnPolicy: "",
+    //         image: null,
+    //         imagePreviewUrl: null,
+    //         images: null
+    //     });
+    // };
+
     const handleFormSubmit = (e) => {
         e.preventDefault();
         const productWithVendorEmail = {
             ...newProduct,
             addedByEmail: vendorAccount.vendorEmail, // Add vendor's email to the product
-            addedByShopName: vendorAccount.shopname
-        }
+            addedByShopName: vendorAccount.shopname,
+        };
+        
+        // Dispatch the product including images to Redux
         dispatch(setAddProduct(productWithVendorEmail));
-        console.log("productWithVendorEmail",productWithVendorEmail);
-        //dispatch(setAddProduct(newProduct))
-        // setProducts([...products,newProduct]);
+        console.log('productWithVendorEmail==>>',productWithVendorEmail);
+        
+        // Clear the form after submission
         setNewProduct({
             name: "",
             description: "",
@@ -159,13 +203,17 @@ const Dashboard = () => {
             returnPolicy: "",
             image: null,
             imagePreviewUrl: null,
-            imageList: null
+            images: [], // Reset images to an empty array
         });
+        setImages([]); // Clear the images state as well
     };
+    
 
     const handleRemove = (index) => {
         dispatch(removeProduct(index)); // Dispatch the remove action
     };
+
+    
 
 
 
@@ -447,7 +495,7 @@ const Dashboard = () => {
                                             </td>
                                             <td style={{ padding: "10px", paddingLeft: '30px' }}>{product.price}</td>
                                             <td style={{ padding: "10px" }}>{product.returnPolicy}</td>
-                                            <td ><button onClick={() => handleRemove(index)} style={{ border: "none", fontSize: 15, width: 80, height: 30, backgroundColor: "#FF9F00" }}>Remove</button></td>
+                                            <td><button onClick={() => handleRemove(index)} style={{ border: "none", fontSize: 15, width: 80, height: 30, backgroundColor: "#FF9F00" }}>Remove</button></td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -483,8 +531,8 @@ const Dashboard = () => {
                                     imageList,
                                     onImageUpload,
                                     onImageRemoveAll,
-                                    onImageUpdate,
-                                    onImageRemove,
+                                    //onImageUpdate,
+                                    //onImageRemove,
                                     isDragging,
                                     dragProps
                                 }) => (
@@ -506,7 +554,7 @@ const Dashboard = () => {
                                                     <img  src={image['data_url']} alt="" style={{ width: 50, height: 50, borderRadius: 5 }} />
                                                     <div className="image-item__btn-wrapper">
                                                         {/* <button onClick={() => onImageUpdate(index)}>Update</button>
-                  <button onClick={() => onImageRemove(index)}>Remove</button> */}
+                                                            <button onClick={() => onImageRemove(index)}>Remove</button> */}
                                                     </div>
                                                 </div>
                                             ))}
@@ -563,52 +611,107 @@ const Dashboard = () => {
                                 <tr style={{ borderLeft: 'none', borderRight: "none", borderBottomWidth: 2, borderColor: '#DEE2E6', }}>
                                     <th scope="col" style={{ padding: "10px", width: "10%", }}>OrderId</th>
                                     <th scope="col" style={{
-                                        // width: '35%', 
+                                         width: '30%', 
                                         padding: "10px", 
                                     }}>Product Name</th>
                                     <th scope="col" style={{
-                                        //  width: '15%',
+                                          width: '15%',
                                           padding: "10px" }}>Price</th>
                                     <th style={{ padding: "10px", 
-                                    // width: '30%'
+                                     width: '20%'
                                      }} scope="col">Customer Name</th>
                                     <th scope="col" style={{ padding: "10px", textAlign: "right", }}>Contact Number</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {
-                                    upcomingPlacedOrder.map((item, index) => (
-                                        
-                                            <tr key={index} style={{ borderLeft: 'none', borderRight: "none", borderBottomWidth: 2, borderColor: '#DEE2E6' }}>
-                                                <td style={{ padding: "10px", }}>{index + 1}</td>
-                                                <td style={{ padding: "10px", }}>
-                                                    <div>
+                            {/* {filteredOrders.map((item, index) => {
+                            
+                            const { name: customerName, phone } =
+                                item.billingDetails || {};
+                                const {  imagePreviewUrl, name, totalPrice } =
+                                item.fetchCartDetails[index] || {};
 
-                                                        {/* <img style={{ height: 25, width: 25 }} 
-                                            src={typeof item.fetchCartDetails[index].imagePreviewUrl === 'string' ? item.fetchCartDetails[index].imagePreviewUrl : (item.fetchCartDetails[index].imagePreviewUrl ? URL.createObjectURL(item.fetchCartDetails[index].imagePreviewUrl) : uo)}
-                                             alt="ll"></img>&nbsp; */}
+                            return (
+                                <tr
+                                    key={item.orderId || index}
+                                    style={{
+                                        borderLeft: "none",
+                                        borderRight: "none",
+                                        borderBottomWidth: 2,
+                                        borderColor: "#DEE2E6",
+                                    }}
+                                >
+                                    <td style={{ padding: "10px" }}>{index + 1}</td>
+                                    <td style={{ padding: "10px" }}>
+                                        <div>
+                                            {imagePreviewUrl && (
+                                                <>
+                                                    <img
+                                                        style={{ height: 25, width: 25 }}
+                                                        src={
+                                                            typeof imagePreviewUrl === "string"
+                                                                ? imagePreviewUrl
+                                                                : URL.createObjectURL(imagePreviewUrl)
+                                                        }
+                                                        alt="Product"
+                                                    />
+                                                    &nbsp;
+                                                    <span>{name}</span>
+                                                </>
+                                            )}
+                                        </div>
+                                    </td>
+                                    <td style={{ padding: "10px" }}>{totalPrice}</td>
+                                    <td style={{ padding: "10px" }}>{customerName}</td>
+                                    <td style={{ padding: "10px", textAlign: "right" }}>
+                                        {phone}
+                                    </td>
+                                </tr>
+                            );
+                        })} */}
+                        {filteredOrders.map((item, index) => {
+    const { name: customerName, phone } = item.billingDetails || {};
+    const fetchDetails = item.fetchCartDetails?.[0] || {}; // Safely access the first item in fetchCartDetails
+    const { imagePreviewUrl, name, totalPrice } = fetchDetails;
 
-                                                        {item.fetchCartDetails[index] && (
-                                                            <>
-                                                                <img
-                                                                    style={{ height: 25, width: 25 }}
-                                                                    src={typeof item.fetchCartDetails[index].imagePreviewUrl === 'string' ? item.fetchCartDetails[index].imagePreviewUrl : (item.fetchCartDetails[index].imagePreviewUrl ? URL.createObjectURL(item.fetchCartDetails[index].imagePreviewUrl) : item.thumbnail)}
-                                                                    alt="ll"
-                                                                />&nbsp;
-                                                                <span>{item.fetchCartDetails[index].name}</span>
-                                                            </>
-                                                        )}
-                                                    </div>
-                                                </td>
-                                                <td style={{ padding: "10px", width: "15%" }}>{item.fetchCartDetails[index].totalPrice}</td>
-                                                <td style={{ padding: "10px", width: "20%" }}>{item.billingDetails.name}</td>
-                                                <td style={{ padding: "10px", textAlign: "right" }}>{item.billingDetails.phone}</td>
-                                            </tr>
-                                        
-                                    )
-
-                                    )
+    return (
+        <tr
+            key={item.orderId || index}
+            style={{
+                borderLeft: "none",
+                borderRight: "none",
+                borderBottomWidth: 2,
+                borderColor: "#DEE2E6",
+            }}
+        >
+            <td style={{ padding: "10px" }}>{index + 1}</td>
+            <td style={{ padding: "10px" }}>
+                <div>
+                    {imagePreviewUrl && (
+                        <>
+                            <img
+                                style={{ height: 25, width: 25 }}
+                                src={
+                                    typeof imagePreviewUrl === "string"
+                                        ? imagePreviewUrl
+                                        : URL.createObjectURL(imagePreviewUrl)
                                 }
+                                alt="Product"
+                            />
+                            &nbsp;
+                            <span>{name}</span>
+                        </>
+                    )}
+                </div>
+            </td>
+            <td style={{ padding: "10px" }}>{totalPrice}</td>
+            <td style={{ padding: "10px" }}>{customerName}</td>
+            <td style={{ padding: "10px", textAlign: "right" }}>
+                {phone}
+            </td>
+        </tr>
+    );
+})}
 
                             </tbody>
                         </table>
@@ -655,21 +758,26 @@ const Dashboard = () => {
             {/* Sidebar */}
             <div style={{
                 backgroundColor: 'white',
-                width: '100%',
+                 width: '100%',
                 height: '15%',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
+                // display: 'flex',
+                // flexDirection: 'row',
+                //justifyContent: 'space-between',
+                display:"grid",
+                gridTemplateColumns:"repeat(3, 1fr)",
                 alignItems: "center"
             }}>
                 <div style={{ display: "flex", flexDirection: "row", marginLeft: 20 }}>
                     <img style={{ height: 40, width: 40, borderRadius:5 }} src={vendorAccount.productimage ? URL.createObjectURL(vendorAccount.productimage) : 'defaultImagePath.jpg'} alt="store"></img>&nbsp;&nbsp;
                     <h3 style={{ fontWeight: 550 }}>{vendorAccount.shopname}</h3>
                 </div>
-                <div style={{}}>
-                    <input style={{ width: 300, height: 35, paddingLeft: 10, borderRadius: 5 }} placeholder="Search"></input>
+                <div style={{display:"flex",flexDirection:"row",width:"80%",borderRadius:8,padding:10,height:35,alignItems:"center",position:"relative",gap:10,border:"1px solid",}}>
+                    <input style={{ width: "90%", height: 25, paddingLeft: 10,border:"none" ,padding:10,fontSize:16,outline:"none"}} placeholder="Search"></input>
+                    <button style={{height:35,background:"none",border:"none",alignItems:"center"}}>
+                    <img style={{height:25,width:25}} src={searchh} alt="searcgh"></img>
+                    </button>
                 </div>
-                <div style={{ marginRight: 50, fontSize: 15, fontWeight: 550 }}>
+                <div style={{ marginLeft:230, fontSize: 15, fontWeight: 550 }}>
 
                     <span>{vendorAccount.firstname}</span>&nbsp;
                     <span>{vendorAccount.lastname}</span>&nbsp;&nbsp;

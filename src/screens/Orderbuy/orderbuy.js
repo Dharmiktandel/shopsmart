@@ -12,13 +12,41 @@ const Orderbuy = () => {
   const getNameEmailData = useSelector((state) => state.signuped.user);
 
   const [billingDetails, setBillingDetails] = useState({
-    name: "",
+    name: `${getNameEmailData.firstname} ${getNameEmailData.lastname}`,
     streetAddress: "",
     apartment: "",
     city: "",
     phone: "",
-    email: "",
+    email: getNameEmailData.email,
   });
+
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const errors = {};
+
+    if (!billingDetails.streetAddress) {
+      errors.streetAddress = "Street address is required";
+    }
+
+    if (!billingDetails.apartment) {
+      errors.apartment = "Apartment is required";
+    }
+
+    if (!billingDetails.city) {
+      errors.city = "City is required";
+    } else if (/[0-9]/.test(billingDetails.city)) {
+      errors.city = "City is invalid";
+    }
+
+    if (!billingDetails.phone) {
+      errors.phone = "Phone number is required";
+    } else if (/^[a-zA-Z]*$/.test(billingDetails.phone) || billingDetails.phone.length !== 10) {
+      errors.phone = "Phone number is invalid";
+    }
+
+    return errors;
+  };
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,15 +56,25 @@ const Orderbuy = () => {
     setBillingDetails({ ...billingDetails, [name]: value });
   };
 
-  const placedOrdered = {billingDetails, fetchCartDetails, totalPrice}
-
   const handlePlaceOrder = () => {
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
 
-    dispatch(setPlacedOrder(placedOrdered))
-    console.log('data redux ma giya')
-    console.log('data navigate thavana bill par')
-    navigate("/bill", { state: { billingDetails, fetchCartDetails, totalPrice } });
-    console.log('data navigate thay giya')
+    const placedOrdered = {
+      billingDetails,
+      fetchCartDetails,
+      totalPrice,
+      getNameEmailData,
+    };
+
+    dispatch(setPlacedOrder(placedOrdered));
+    console.log("setplaceorderrrr",placedOrdered);
+    navigate("/bill", {
+      state: { billingDetails, fetchCartDetails, totalPrice, getNameEmailData },
+    });
   };
 
   return (
@@ -44,54 +82,62 @@ const Orderbuy = () => {
       <Navbar />
       <div className="billconatiner">
         <div className="billdtl">
-          <h3 style={{ fontWeight: 1000 }}>Billing Details</h3><br />
-          <span style={{ fontWeight: "800" }}>Name</span><br />
+          <h3 style={{ fontWeight: 1000,fontFamily:"-moz-initial" }}>Billing Details</h3><br />
+          <span style={{ fontWeight: "800" ,fontFamily:"-moz-initial"}}>Name</span><br />
           <input
             style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }}
             type="text"
             name="name"
-            value={`${getNameEmailData.firstname} ${getNameEmailData.lastname}`}
-            // onChange={handleInputChange}
+            value={billingDetails.name}
+            readOnly
           /><br /><br />
-          <span style={{ fontWeight: "800" }}>Street Address</span><br />
+          <span style={{ fontWeight: "800",fontFamily:"-moz-initial" }}>Street Address</span><br />
           <input
             style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }}
             type="text"
             name="streetAddress"
             value={billingDetails.streetAddress}
             onChange={handleInputChange}
-          /><br /><br />
-          <span style={{ fontWeight: "800" }}>Apartment, floor etc..</span><br />
+          />
+          {errors.streetAddress && <p  style = {{color:'red',marginBottom:-20}} className="error">{errors.streetAddress}</p>}
+          <br /><br />
+          <span style={{ fontWeight: "800",fontFamily:"-moz-initial" }}>Apartment, floor etc..</span><br />
           <input
             style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }}
             type="text"
             name="apartment"
             value={billingDetails.apartment}
             onChange={handleInputChange}
-          /><br /><br />
-          <span style={{ fontWeight: "800" }}>City</span><br />
+          />
+          {errors.apartment && <p style = {{color:'red',marginBottom:-20}} className="error">{errors.apartment}</p>}
+          <br /><br />
+          <span style={{ fontWeight: "800",fontFamily:"-moz-initial" }}>City</span><br />
           <input
             style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }}
             type="text"
             name="city"
             value={billingDetails.city}
             onChange={handleInputChange}
-          /><br /><br />
-          <span style={{ fontWeight: "800" }}>Phone Number</span><br />
+          />
+          {errors.city && <p style = {{color:'red',marginBottom:-20}} className="error">{errors.city}</p>}
+          <br /><br />
+          <span style={{ fontWeight: "800",fontFamily:"-moz-initial" }}>Phone Number</span><br />
           <input
             style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }}
             type="text"
             name="phone"
             value={billingDetails.phone}
             onChange={handleInputChange}
-          /><br /><br />
-          <span style={{ fontWeight: "800" }}>Email Address</span><br />
+          />
+          {errors.phone && <p style = {{color:'red',marginBottom:-20}} className="error">{errors.phone}</p>}
+          <br /><br />
+          <span style={{ fontWeight: "800",fontFamily:"-moz-initial" }}>Email Address</span><br />
           <input
             style={{ border: "none", background: "#f2f2f2", padding: 5, width: 300 }}
             type="email"
             name="email"
-            value={getNameEmailData.email}
-            // onChange={handleInputChange}
+            value={billingDetails.email}
+            readOnly
           /><br /><br />
         </div>
         <div style={{ marginTop: 130 }}>

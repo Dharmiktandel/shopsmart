@@ -5,13 +5,13 @@
 }
 .Profile{
     background-color: white;
-    height: 70px;
+    height: 80px;
     width: 300px;
     padding-top: 15px;
     padding-left: 20px;
     display: flex;
     flex-direction: row;
-   
+    border-radius: 10px;
     
     
 }
@@ -27,16 +27,18 @@
     height: 300px;
     width: 300px;
      margin-top: 30px;
+     border-radius: 10px;
      
 } 
 .rightsidediv{
     
-    height: 400px;
+    height: 410px;
     width: 600px;
     margin-top: 70px;
     padding-left: 30px;
     padding-top: 30px;
     background-color: white;
+    border-radius: 10px;
 }
 .rootcontainer{
     display: flex;

@@ -37,10 +37,11 @@ export const addToCart = (emails, item) => ({
     payload:  {emails, item}
 });
 
-export const removeFromCart = (emails , itemId) => ({
+export const removeFromCart = (emails, index) => ({
     type: 'REMOVE_FROM_CART',
-    payload: {emails, itemId}
+    payload: { emails, index }
 });
+
 
 // New actions for total price
 export const setTotalPrice = (totalPrice) => ({

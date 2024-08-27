@@ -142,15 +142,15 @@ const addtocartReducer = (state = addtocartInitialState, action) => {
         }
         
         case 'REMOVE_FROM_CART': {
-            const { emails, itemId } = action.payload;
+            const { emails, index } = action.payload;
             console.log("Emails:", emails);
-            console.log("ItemId:", itemId);
+            console.log("Index:", index);
             
             const userCart = state.addtocartItems[emails] || []; // Ensure it's an array
             console.log("Current Cart:", userCart);
             
-            // Filter out the item by its id
-            const updatedCart = userCart.filter(item => item.id !== itemId);
+            // Remove the item at the specified index
+            const updatedCart = userCart.filter((_, i) => i !== index);
             console.log("Updated Cart:", updatedCart);
         
             return {
@@ -162,13 +162,11 @@ const addtocartReducer = (state = addtocartInitialState, action) => {
             };
         }
         
-        
-        
-        
         default:
             return state;
     }
 };
+
 
 // Reducer for total price actions
 const totalPriceReducer = (state = totalPriceInitialState, action) => {
